@@ -1,0 +1,16 @@
+svg {
+  width: 30px;
+  height: 30px;
+}
+
+.text__center{
+  align-items: center;
+}
+
+.text__color{
+  color: #5542f6
+}
+
+.link__container{
+  width: 300px;
+}
