@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import store from "./Redux/store/store";
 import './index.css'
 import LayoutAdmin from "./components/admin/LayoutAdmin.jsx";
-import HabitacionesAdmin from "./components/admin/HabitacionesAdmin.jsx";
+import HabitacionesAdmin from "./components/admin/habitaciones/HabitacionesAdmin.jsx";
 import ReservaAdmin from "./components/admin/ReservaAdmin.jsx";
 import UsuariosAdmin from "./components/admin/UsuariosAdmin.jsx";
 

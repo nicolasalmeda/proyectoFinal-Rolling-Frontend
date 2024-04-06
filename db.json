@@ -1,0 +1,40 @@
+{
+  "habitaciones": [
+    {
+      "numero": 1,
+      "tipo": "individual",
+      "precio": "200",
+      "imagen": "https://t2.uc.ltmcdn.com/es/posts/6/1/1/como_reservar_una_habitacion_por_horas_en_un_hotel_de_lujo_18116_600.jpg",
+      "disponibilidad": "disponible",
+      "descripcion": "ready la room y lista",
+      "id": "e5ba"
+    },
+    {
+      "numero": 2,
+      "tipo": "doble",
+      "precio": "100",
+      "imagen": "https://t2.uc.ltmcdn.com/es/posts/6/1/1/como_reservar_una_habitacion_por_horas_en_un_hotel_de_lujo_18116_600.jpg",
+      "disponibilidad": "disponible",
+      "descripcion": "muy buena habitacion",
+      "id": "a7b1"
+    },
+    {
+      "numero": 3,
+      "tipo": "triple",
+      "precio": "150",
+      "imagen": "https://t2.uc.ltmcdn.com/es/posts/6/1/1/como_reservar_una_habitacion_por_horas_en_un_hotel_de_lujo_18116_600.jpg",
+      "disponibilidad": "no disponible",
+      "descripcion": "amplia bien rentada y limpia",
+      "id": "3de9"
+    },
+    {
+      "numero": "200",
+      "tipo": "triple",
+      "precio": "100",
+      "imagen": "https://t2.uc.ltmcdn.com/es/posts/6/1/1/como_reservar_una_habitacion_por_horas_en_un_hotel_de_lujo_18116_600.jpg",
+      "disponibilidad": "no disponible",
+      "descripcion": "prueba de habitacion creada",
+      "id": "afc1"
+    }
+  ]
+}
