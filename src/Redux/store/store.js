@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import habitacionesReducer from '../reducer/reducer';
+import habitacionesReducer from '../reducer/habitacionesReducer';
 import usuarioReducer from '../reducer/usuarioReducer'; 
 
 const rootReducer = combineReducers({
