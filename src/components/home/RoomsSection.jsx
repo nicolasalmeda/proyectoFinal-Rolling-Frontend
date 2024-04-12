@@ -7,7 +7,7 @@ const RoomsSection = () => {
     const { allHabitaciones } = useSelector((state) => state.habitaciones)
 
     return (
-        <section className="container">
+        <section className="container-fluid bg-card ">
             <h2 className="text-center">alojamiento vip </h2>
             <div className="d-flex row">
                 {allHabitaciones.map((habitacion) => 

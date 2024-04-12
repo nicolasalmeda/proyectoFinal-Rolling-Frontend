@@ -15,6 +15,12 @@
   }
 
   
+  .bg-card{
+    background-color: #F9FFCB;
+  }
+
+
+
   @media (max-width: 576px) {
     .card-image-container {
       max-width: 100%; 
