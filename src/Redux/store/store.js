@@ -5,7 +5,7 @@ import usuarioReducer from '../reducer/usuarioReducer';
 
 const rootReducer = combineReducers({
     habitaciones: habitacionesReducer,
-    usuario: usuarioReducer 
+    usuarios: usuarioReducer 
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
