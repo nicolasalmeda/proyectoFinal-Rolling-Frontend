@@ -94,7 +94,7 @@ export const USUARIO_ERROR = 'USUARIO_ERROR';
 export const loginUsuario = (email, password) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('http://localhost:3001/login', { email, password });
+            const response = await axios.post('/login', { email, password });
             dispatch({
                 type: LOGIN_USUARIO,
                 payload: response.data.token
@@ -111,7 +111,7 @@ export const loginUsuario = (email, password) => {
 export const registroUsuario = (datosUsuario) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('http://localhost:3001/usuarios', datosUsuario);
+            const response = await axios.post('/usuarios', datosUsuario);
             dispatch({
                 type: REGISTRO_USUARIO,
                 payload: response.data
