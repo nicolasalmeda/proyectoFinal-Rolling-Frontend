@@ -15,7 +15,6 @@ const HabitacionesAdmin = () => {
   const [isEdit, setIsEdit] = useState(false)
   const rooms = useSelector((state) => state.habitaciones.habitaciones)
 
-  console.log(rooms)
   const mappedRooms = rooms && Array.isArray(rooms) ? rooms.map(room => ({
     ...room,
     key: room._id
@@ -41,6 +40,10 @@ const HabitacionesAdmin = () => {
       dataIndex: 'numero',
     },
     {
+      title: 'Descripción',
+      dataIndex: 'descripcion',
+    },
+    {
       title: 'Tipo',
       dataIndex: 'tipo',
     },
@@ -49,7 +52,7 @@ const HabitacionesAdmin = () => {
       dataIndex: 'precio',
     },
     {
-      title: 'Etado',
+      title: 'Estado',
       dataIndex: 'disponibilidad',
       render: (disponiblidad) => (
         <Tag color={disponiblidad === 'disponible' ? 'green' : 'red'}>{disponiblidad}</Tag>

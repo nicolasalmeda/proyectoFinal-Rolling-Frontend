@@ -10,3 +10,11 @@ svg {
 .text__color{
   color: #5542f6
 }
+
+.background__color{
+  background-color: rgb(215, 214, 214);
+}
+
+.background__color--header{
+  background-color: rgb(139, 139, 139);
+}

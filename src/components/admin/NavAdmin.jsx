@@ -5,13 +5,13 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import './admin.css'
 
 
 
 
 const NavAdmin = () => {
 
-  const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
   const pathname = location.pathname;
   const inactiveLink = 'nav-link d-flex gap-2 py-3 ms-2  ';
@@ -24,13 +24,15 @@ const NavAdmin = () => {
   <>
   <Navbar bg="light" expand={false} className="adminNavBar">
     <Container>
-      <Navbar.Brand as={Link} to="/adminhome">
+      <Navbar.Brand as={Link} to="/admin">
+      
         Hotelería
       </Navbar.Brand>
       <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
       <Navbar.Offcanvas
         aria-labelledby={`offcanvasNavbarLabel-expand-${false}`}
         placement="end"
+        className="background__color"
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Hotelería</Offcanvas.Title>

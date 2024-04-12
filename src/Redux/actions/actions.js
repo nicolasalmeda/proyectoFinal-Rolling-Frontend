@@ -124,3 +124,105 @@ export const registroUsuario = (datosUsuario) => {
         }
     };
 };
+
+
+//RESERVAS
+
+export const GET_RESERVAS = 'GET_RESERVAS';
+export const DELETE_RESERVA = 'DELETE_RESERVA';
+export const ADD_RESERVA = 'ADD_RESERVA';
+export const UPDATE_RESERVA = 'UPDATE_RESERVA';
+export const GET_RESERVAS_BY_HABITACION = 'GET_RESERVAS_BY_HABITACION';
+
+export const getReservas = () => {
+    return async (dispatch) => {
+        try{
+            const response = await axios.get('/reservas');
+            dispatch({
+                type: GET_RESERVAS,
+                payload: {
+                    reservas: response.data,
+                    allReservas: response.data
+                }
+            });
+        } catch (error) {
+            dispatch({
+                type: 'RESERVAS_ERROR',
+                payload: error.message
+            });
+        }
+    }
+}
+
+export const deleteReserva = (id) => {
+    return async (dispatch) => {
+        try {
+            await axios.delete(`/reservas/${id}`);
+            dispatch({
+                type: DELETE_RESERVA,
+                payload: id
+            });
+        } catch (error) {
+            dispatch({
+                type: 'RESERVAS_ERROR',
+                payload: error.message
+            });
+        }
+    };
+};
+
+export const addReserva = (reserva) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.post('/reservas', reserva);
+            dispatch({
+                type: ADD_RESERVA,
+                payload: response.data,
+            });
+        } catch (error) {
+            dispatch({
+                type: 'RESERVAS_ERROR',
+                payload: error.message
+            });
+        }
+    };
+}
+
+export const updateReserva = (id, reserva) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(`/reservas/${id}`, reserva);
+            dispatch({
+                type: UPDATE_RESERVA,
+                payload: {
+                    id,
+                    reserva
+                }
+            });
+        } catch (error) {
+            dispatch({
+                type: 'RESERVAS_ERROR',
+                payload: error.message
+            });
+        }
+    };
+}
+
+export const getReservasByIdHabitacion = (id) => {
+    return async (dispatch) => {
+        try{
+            const response = await axios.get(`/reservas/habitacion/${id}`);
+            dispatch({
+                type: GET_RESERVAS_BY_HABITACION,
+                payload: {
+                    fechaReservas: response.data,
+                }
+            });
+        } catch (error) {
+            dispatch({
+                type: 'RESERVAS_ERROR',
+                payload: error.message
+            });
+        }
+    }
+}
