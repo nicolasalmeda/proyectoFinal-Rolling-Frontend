@@ -1,10 +1,10 @@
-import { GET_RESERVAS, DELETE_RESERVA, ADD_RESERVA, UPDATE_RESERVA, GET_RESERVAS_BY_HABITACION } from '../actions/actions';
+import { GET_RESERVAS, DELETE_RESERVA, ADD_RESERVA, UPDATE_RESERVA, GET_RESERVAS_BY_HABITACION, CLEAN_STATE_FECHAS_RESERVAS } from '../actions/actions';
 
 
 const initialState = {
   reservas: [],
   allReservas: [],
-  fechaReervas: [],
+  fechasReservas: [],
 };
 
 const reservasReducer = (state = initialState, action) => {
@@ -36,15 +36,23 @@ const reservasReducer = (state = initialState, action) => {
     case UPDATE_RESERVA:
       return {
         ...state,
-        reservas: state.reservas.map(reserva => reserva._id === action.payload.id ? action.payload : reserva),
-        allReservas: state.allReservas.map(reserva => reserva._id === action.payload.id ? action.payload : reserva),
+        reservas: state.reservas.map(reserva => reserva._id === action.payload._id ? action.payload : reserva),
+        allReservas: state.allReservas.map(reserva => reserva._id === action.payload._id ? action.payload : reserva),
         error: null,
       };
 
     case GET_RESERVAS_BY_HABITACION:
+      
       return {
         ...state,
-        fechasReservas: action.payload.fechasReservas,
+        fechasReservas: action.payload,
+        error: null,
+      };
+
+    case CLEAN_STATE_FECHAS_RESERVAS:
+      return {
+        ...state,
+        fechasReservas: [],
         error: null,
       };
 

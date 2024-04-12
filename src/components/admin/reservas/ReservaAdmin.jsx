@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Button,Space, Table, Tag, Modal, notification} from 'antd'
 import { getReservas,deleteReserva } from '../../../Redux/actions/actions';
 import NavAdmin from '../NavAdmin'
-// import ModalHabitaciones from './ModalHabitaciones'
+ import ModalReservas from './ModalReservas'
 import { useDispatch,useSelector } from 'react-redux';
 import { SmileOutlined } from '@ant-design/icons';
 import '../admin.css'
@@ -50,6 +50,10 @@ const HabitacionesAdmin = () => {
     {
       title: 'Usuario',
       dataIndex: 'usuario',
+    },
+    {
+      title: 'Habitacion',
+      dataIndex: 'habitacion',
     },
     {
       title: 'Estado',
@@ -111,7 +115,7 @@ const HabitacionesAdmin = () => {
   ]
 
   const showModal = (record) => {
-    setRoomData(record)
+    setReservaData(record)
     setModalVisible(true)
     setIsEdit(true)
   }
@@ -154,11 +158,11 @@ const HabitacionesAdmin = () => {
                 x: 1000,
               }}
             />
-            {/* <ModalHabitaciones
+            <ModalReservas
             open={modalVisible}
-            initialValues={roomData}
+            initialValues={reservaData}
             onCancel={handleCancel}
-            isEdit={isEdit} /> */}
+            isEdit={isEdit} />
             </div>
         </div> 
       </div>

@@ -13,7 +13,6 @@ export const getHabitaciones = () => {
     return async (dispatch) => {
         try{
             const response = await axios.get('/habitaciones');
-            console.log(response.data)
             dispatch({
                 type: GET_HABITACIONES,
                 payload: {
@@ -133,6 +132,7 @@ export const DELETE_RESERVA = 'DELETE_RESERVA';
 export const ADD_RESERVA = 'ADD_RESERVA';
 export const UPDATE_RESERVA = 'UPDATE_RESERVA';
 export const GET_RESERVAS_BY_HABITACION = 'GET_RESERVAS_BY_HABITACION';
+export const CLEAN_STATE_FECHAS_RESERVAS = 'CLEAN_STATE_FECHAS_RESERVAS';
 
 export const getReservas = () => {
     return async (dispatch) => {
@@ -208,15 +208,14 @@ export const updateReserva = (id, reserva) => {
     };
 }
 
-export const getReservasByIdHabitacion = (id) => {
+export const getReservasByIdHabitacion = (id) => { 
     return async (dispatch) => {
         try{
             const response = await axios.get(`/reservas/habitacion/${id}`);
+            
             dispatch({
                 type: GET_RESERVAS_BY_HABITACION,
-                payload: {
-                    fechaReservas: response.data,
-                }
+                payload: response.data
             });
         } catch (error) {
             dispatch({
@@ -224,5 +223,14 @@ export const getReservasByIdHabitacion = (id) => {
                 payload: error.message
             });
         }
+    }
+}
+
+export const cleanStateFechaReservas = () => {
+    return async (dispatch) => {
+        dispatch({
+            type: 'CLEAN_STATE_FECHAS_RESERVAS',
+            payload: []
+        });
     }
 }
