@@ -1,0 +1,41 @@
+
+.card-image{
+    height: 250px !important;
+    
+}
+
+  .card-image-container {
+    max-width: 300px;
+  }
+  
+  .icon-favorit{
+    position: absolute;
+    top: 1%;
+    right: 2%;
+  }
+
+  
+  @media (max-width: 576px) {
+    .card-image-container {
+      max-width: 100%; 
+    }
+  }
+  
+  @media (min-width: 576px) {
+    .w-50 {
+      width: 50%; 
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .w-50 {
+      width: 50%; 
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .w-50 {
+      width: 33.33%; 
+    }
+  }
+  

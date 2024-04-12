@@ -1,7 +1,6 @@
 import axios from 'axios';
 const URI = import.meta.env.VITE_API_URI;
 axios.defaults.baseURL=URI;
-
 export const GET_HABITACIONES = 'GET_HABITACIONES';
 export const DELETE_HABITACION = 'DELETE_HABITACION';
 export const ADD_HABITACION = 'ADD_HABITACION';
