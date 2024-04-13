@@ -1,0 +1,26 @@
+.detalle-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .descripcion-breve {
+    flex: 1;
+    margin-right: 20px; /* Espacio entre las columnas */
+  }
+  
+  .imagen-hotel {
+    flex: 1;
+  }
+  
+  .imagen-hotel img {
+    max-width: 70%; /* Ajustar la imagen al ancho de su contenedor */
+  }
+
+  .btn-details{
+    font-size: 20px;
+  }
+
+.bg-details{
+  background: rgb(237, 228, 104);
+  background: linear-gradient(90deg, rgba(237,228,104,1) 5%, rgba(239,238,193,1) 16%, rgba(226,229,212,1) 31%, rgba(222,226,217,1) 100%); 
+}

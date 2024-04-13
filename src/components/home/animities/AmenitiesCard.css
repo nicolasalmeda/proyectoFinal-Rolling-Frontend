@@ -1,0 +1,21 @@
+.card-container-amenities {
+    width: 300px;
+  }
+  
+  .logo-amenities {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .title-amenities {
+    margin: 0;
+  }
+  
+  .description-amenities {
+    margin-bottom: 10px;
+  }
+  
+  .button-amenities {
+    margin-top: 10px;
+  }
