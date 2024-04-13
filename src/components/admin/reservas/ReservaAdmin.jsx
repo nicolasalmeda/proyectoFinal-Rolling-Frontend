@@ -140,15 +140,16 @@ const HabitacionesAdmin = () => {
   };
 
   return (
-    <div className=' mainContainer bg-secondary room__container'>
+    <div className=' mainContainer background__color--header room__container'>
       <NavAdmin />
-      <div className='bg-white d-flex flex-grow-1 mb-2 m-4 rounded p-4'>
+      <div className='background__color d-flex flex-grow-1 mb-2 m-4 rounded p-4'>
         <div className='d-flex flex-column w-100'>
-          <h3 className='w-100 text-center'>Panel de Habitaciones</h3>
+          <h3 className='w-100 text-center'>Panel de Reservas</h3>
           <div className='d-flex justify-content-end w-100'>
             <Button className='my-4' type='primary' onClick={handleAddRoomClick}>Agregar Reserva</Button>
           </div>
             <Table
+              className='table__container'
               columns={Columns}
               dataSource={mappedReservas}
               responsive
