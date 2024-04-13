@@ -87,40 +87,100 @@ export const updateHabitacion = (id, habitacion) => {
 //USUARIOS
 
 export const LOGIN_USUARIO = 'LOGIN_USUARIO';
-export const REGISTRO_USUARIO = 'REGISTRO_USUARIO';
-export const USUARIO_ERROR = 'USUARIO_ERROR';
+export const GET_USUARIOS = 'GET_USUARIOS';
+export const DELETE_USUARIO = 'DELETE_USUARIO';
+export const ADD_USUARIO = 'ADD_USUARIO';
+export const UPDATE_USUARIO = 'UPDATE_USUARIO';
+export const USUARIOS_ERROR = 'USUARIOS_ERROR';
 
 export const loginUsuario = (email, password) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('http://localhost:3001/login', { email, password });
+            const response = await axios.post('/login', { email, password });
             dispatch({
                 type: LOGIN_USUARIO,
                 payload: response.data.token
             });
         } catch (error) {
             dispatch({
-                type: USUARIO_ERROR,
+                type: USUARIOS_ERROR,
                 payload: error.message
             });
         }
     };
 };
 
-export const registroUsuario = (datosUsuario) => {
+export const getUsuarios = () => {
     return async (dispatch) => {
-        try {
-            const response = await axios.post('http://localhost:3001/usuarios', datosUsuario);
-            dispatch({
-                type: REGISTRO_USUARIO,
-                payload: response.data
-            });
-        } catch (error) {
-            dispatch({
-                type: USUARIO_ERROR,
-                payload: error.message
-            });
-        }
+      try {
+        const response = await axios.get('/usuarios');
+        dispatch({
+          type: GET_USUARIOS,
+          payload: {
+            usuarios: response.data,
+            allUsuarios: response.data
+          }
+        });
+      } catch (error) {
+        dispatch({
+          type: USUARIOS_ERROR,
+          payload: error.message
+        });
+      }
+    };
+  };
+  
+  export const deleteUsuario = (id) => {
+    return async (dispatch) => {
+      try {
+        await axios.delete(`/usuarios/${id}`);
+        dispatch({
+          type: DELETE_USUARIO,
+          payload: id
+        });
+      } catch (error) {
+        dispatch({
+          type: USUARIOS_ERROR,
+          payload: error.message
+        });
+      }
+    };
+  };
+  
+  export const createUsuario = (usuario) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.post('/usuarios', usuario);
+        dispatch({
+          type: ADD_USUARIO,
+          payload: response.data,
+        });
+      } catch (error) {
+        dispatch({
+          type: USUARIOS_ERROR,
+          payload: error.message
+        });
+      }
+    };
+  };
+  
+  export const updateUsuario = (id, usuario) => {
+    return async (dispatch) => {
+      try {
+        const response = await axios.put(`/usuarios/${id}`, usuario);
+        dispatch({
+          type: UPDATE_USUARIO,
+          payload: {
+            id,
+            usuario: response.data
+          }
+        });
+      } catch (error) {
+        dispatch({
+          type: USUARIOS_ERROR,
+          payload: error.message
+        });
+      }
     };
 };
 
@@ -234,3 +294,5 @@ export const cleanStateFechaReservas = () => {
         });
     }
 }
+
+  
