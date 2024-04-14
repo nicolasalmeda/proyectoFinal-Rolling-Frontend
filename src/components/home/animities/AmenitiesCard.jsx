@@ -1,19 +1,20 @@
-/// AmenitiesCard.js
 import React from 'react';
 import { Card, Button } from 'antd';
-import './AmenitiesCard.css'; // Importar el archivo CSS con los estilos
+import './AmenitiesCard.css';
 
-const AmenitiesCard = ({ icon, title, description }) => {
+const AmenitiesCard = ({ icon, title, description,onClick}) => {
   return (
-    <Card className="card-container-amenities">
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
-        <div className=' me-4'>{icon}</div>
-        <h4 className="title-amenities">{title}</h4>
+    <Card className="card-container-amenities d-flex align-items-center justify-content-center" onClick={onClick}>
+      <div className="d-flex align-items-center">
+        <div className='me-4'>{icon}</div>
+        <div className='flex-grow-1'>
+          <h4 className="title-amenities">{title}</h4>
+          <p className="description-amenities">{description}</p>
+        </div>
       </div>
-      <p className="description-amenities">{description}</p>
-      <Button type="primary" className="button-amenities">Ver más</Button>
     </Card>
   );
 };
 
 export default AmenitiesCard;
+

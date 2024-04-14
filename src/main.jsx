@@ -11,6 +11,7 @@ import LayoutAdmin from "./components/admin/LayoutAdmin.jsx";
 import HabitacionesAdmin from "./components/admin/habitaciones/HabitacionesAdmin.jsx";
 import ReservaAdmin from "./components/admin/reservas/ReservaAdmin.jsx";
 import UsuariosAdmin from "./components/admin/usuarios/UsuariosAdmin.jsx";
+import DetallesAminities from "./components/aminitiesDetails/DetallesAminities.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/admin/habitaciones" element={<HabitacionesAdmin/>} />
         <Route path="/admin/reservas" element={<ReservaAdmin/>} />
         <Route path="/admin/usuarios" element={<UsuariosAdmin/>} />
+        <Route path="/servicio/:amenities" element={<DetallesAminities/>} />
       </Routes>
     </BrowserRouter>
   </Provider>

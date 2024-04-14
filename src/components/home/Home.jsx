@@ -16,7 +16,8 @@ const Home = () => {
                 <Button type="primary" shape="round" className='button-home '>Reservar ahora</Button>
                 <RoomsSection/>
                 <DetailsHotel/>
-                <div className='banner-2-home mt-4 mb-4'>
+                <div className='banner-2-home'>
+                    <p>subtittle</p>
                   </div>
                 <div> <h2 className='text-center'>Amenities del hotel</h2></div>
                 <Amenities></Amenities>
