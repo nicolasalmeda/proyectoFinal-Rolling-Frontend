@@ -43,8 +43,12 @@ const Login = () => {
   
     const handleLogin = async () => {
       dispatch(loginUsuario(input.email, input.password));
+        .then((response) => {
+          if (response.token) {
+            sessionStorage.setItem('token', response.token);
+          }
+        });
     };
-  
     return (
       <div className='mainContainer py-4'>
         <h2 className='ms-2'>Login</h2>
