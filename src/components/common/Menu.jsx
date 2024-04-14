@@ -5,7 +5,7 @@ import logo from '../../assets/img/logo-bell.png';
 
 const Menu = () => {
   return (
-    <Navbar expand="lg" data-bs-theme="dark" className="bg-transparent fixed-top">
+    <Navbar expand="lg" data-bs-theme="dark" className='bg-dark text-light'>
     <Container>
       <Navbar.Brand as={Link} to='/' className='text-white'> <img
               alt="logo"
@@ -17,13 +17,14 @@ const Menu = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
-          <NavLink end to="/" className='nav-link text-white'>Inicio</NavLink>
-          <NavLink end to="/usuarios" className='nav-link text-white'>Usuarios</NavLink>
-          <NavLink end to="/habitaciones" className='nav-link text-white'>Habitaciones</NavLink>
-          <NavLink end to="/reservas" className='nav-link text-white'>Reservas</NavLink>
+          <NavLink  to="/" className='nav-link text-white'>Inicio</NavLink>
+          <NavLink  to="/quienes" className='nav-link text-white'>Quiénes Somos</NavLink>
+          <NavLink  to="/contacto" className='nav-link text-white'>Contacto</NavLink>
+          <NavLink  to="/galeria" className='nav-link text-white'>Galería de Imágenes</NavLink>
+          <NavLink  to="/habitaciones" className='nav-link text-white'>Cátalogo de habitaciones</NavLink>
           <NavDropdown title="Mi Cuenta" id="basic-nav-dropdown" className='text-white'>
-              <NavDropdown.Item end to="/login">Iniciar sesión</NavDropdown.Item>
-              <NavDropdown.Item end to="/registro">Registro</NavDropdown.Item>
+              <Link to="/login" className="dropdown-item">Iniciar sesión</Link>
+              <Link to="/registro" className="dropdown-item">Registro</Link>
             </NavDropdown>
         </Nav>
       </Navbar.Collapse>
