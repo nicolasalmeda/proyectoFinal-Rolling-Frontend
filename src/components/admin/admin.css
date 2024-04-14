@@ -1,4 +1,4 @@
-svg {
+.icon__nav {
   width: 30px;
   height: 30px;
 }
@@ -12,9 +12,31 @@ svg {
 }
 
 .background__color{
-  background-color: rgb(215, 214, 214);
+  background-color: rgb(215, 228, 228);
 }
 
 .background__color--header{
-  background-color: rgb(139, 139, 139);
+  background-color: #253C59;
+}
+
+.table__container{
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  background-color: white;
+}
+
+.card__admin{
+  border-radius: 10px;
+  border: 3px solid ;
+  width: 300px;
+  height: 300px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 1, 0.5);
+  cursor: pointer;
+  background-color: white;
+}
+
+
+.icon__admin{
+  width: 200px;
+  height: 200px;
 }

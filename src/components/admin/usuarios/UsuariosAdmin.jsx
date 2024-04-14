@@ -1,88 +1,156 @@
-import React,{ useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUsuarios, deleteUsuario, createUsuario, updateUsuario } from './redux/actions/actions';
+import React, {useEffect, useState} from 'react'
+import {Button,Space, Table, Tag, Modal, notification} from 'antd'
+import { getUsuarios, deleteUsuario, createUsuario, updateUsuario } from '../../../Redux/actions/actions';
 import NavAdmin from '../NavAdmin'
+import { useDispatch,useSelector } from 'react-redux';
+import { SmileOutlined } from '@ant-design/icons';
 import '../admin.css'
+import '../habitaciones/habitaciones.css'
+import ModalUsuarios from './ModalUsuarios';
 
-const UsuariosAdmin = () => {
-  const usuarios = useSelector(state => state.usuarios.usuarios);
-  const dispatch = useDispatch();
+const HabitacionesAdmin = () => {
+  const [modalVisible, setModalVisible] = useState(false)
+  const dispatch = useDispatch()
+  const [usuarioData, setUsuarioData] = useState([])
+  const [isEdit, setIsEdit] = useState(false)
+  const usuarios = useSelector((state) => state.usuarios.usuarios)
+
+  const mappedUsuarios = usuarios && Array.isArray(usuarios) ? usuarios.map(usuario => ({
+    ...usuario,
+    key: usuario._id
+  })) : [];
 
   useEffect(() => {
-    dispatch(getUsuarios());
-  }, [dispatch]);
+    dispatch(getUsuarios())
+  }, [dispatch])
 
-  const [formData, setFormData] = useState({
-    nombre: '',
-    apellido: '',
-    email: '',
-    password: '',
-    fecha_nacimiento: ''
-  });
+  const handleAddUsuarioClick = () => {
+    setModalVisible(true)
+    setIsEdit(false)
+    setUsuarioData({})
+  }
 
-  const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleModalCancel = () => {
+    setModalVisible(false)
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(createUsuario(formData));
-    setFormData({
-      nombre: '',
-      apellido: '',
-      email: '',
-      password: '',
-      fecha_nacimiento: ''
+  const Columns = [
+    { 
+      title: 'Email',
+      dataIndex: 'email',
+    },
+    {
+      title: 'Nombre',
+      dataIndex: 'nombre',
+    },
+    {
+      title: 'apellido',
+      dataIndex: 'apellido',
+    },
+    {
+      title: 'Admin',
+      dataIndex: 'rol',
+      render: (rol) => (
+        <Tag color={rol === true ? 'green' : 'red'}>{rol === true ? 'Es admin' : 'No es admin'}</Tag>
+      ),
+      width: 150,
+      align: 'center',
+      },
+    {
+      title: 'Acciones',
+      dataIndex: 'Acciones',
+      render: (text, record) => (
+        <Space size="small">
+          <Button type='primary' 
+          ghost
+          onClick={() =>showModal(record)}
+          >
+            Editar
+          </Button>
+          <Button
+            danger
+            onClick={() => {
+              Modal.confirm({
+                title: 'Eliminar Usuario',
+                content: `¿Está seguro que quiere eliminar el usuario ${record.nombre}?`,
+                okText: 'Eliminar',
+                okType: 'danger',
+                onOk() {
+                  dispatch(deleteUsuario(record._id))
+                  openNotification(record.nombre)
+                  dispatch(getUsuarios())
+                },
+                footer: (_, { OkBtn, CancelBtn }) => (
+                  <>
+                    <CancelBtn />
+                    <OkBtn type="primary" danger >Eliminar</OkBtn>
+                  </>
+                ),
+              });
+            }}
+          >
+            Eliminar
+          </Button>
+        </Space>
+      ),
+      width: 150,
+    }
+  ]
+
+  const showModal = (record) => {
+    setUsuarioData(record)
+    setModalVisible(true)
+    setIsEdit(true)
+  }
+
+  const handleCancel = () =>{
+    setModalVisible(false)
+  }
+
+  const openNotification = (numero) => {
+    notification.success({
+      message: 'Habitación eliminada',
+      description:
+      `La habitacion ${numero} ha sido eliminada correctamente`,
+      icon: (
+        <SmileOutlined
+          style={{
+            color: '#00dc00',
+          }}
+        />
+      ),
     });
   };
 
-  const handleDelete = id => {
-    dispatch(deleteUsuario(id));
-  };
-
-  const handleUpdate = (id, usuario) => {
-    dispatch(updateUsuario(id, usuario));
-  };
-
   return (
-    <div>
-      <NavAdmin/>
-      <h1>Panel de Administrador de Usuarios</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} placeholder="Nombre" />
-        <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} placeholder="Apellido" />
-        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Correo electrónico" />
-        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Contraseña" />
-        <input type="date" name="fecha_nacimiento" value={formData.fecha_nacimiento} onChange={handleChange} placeholder="Fecha de nacimiento" />
-        <button type="submit">Agregar Usuario</button>
-      </form>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {usuarios.map(usuario => (
-            <tr key={usuario._id}>
-              <td>{usuario.nombre}</td>
-              <td>{usuario.apellido}</td>
-              <td>{usuario.email}</td>
-              <td>{usuario.fecha_nacimiento}</td>
-              <td>
-                <button onClick={() => handleUpdate(usuario._id, { nombre: 'Nuevo Nombre' })}>Actualizar</button>
-                <button onClick={() => handleDelete(usuario._id)}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+    <div className=' mainContainer background__color--header room__container w-100'>
+      <NavAdmin />
+      <div className='background__color d-flex flex-grow-1 mb-2 m-4 rounded p-4'>
+        <div className='d-flex flex-column w-100'>
+          <h3 className='w-100 text-center'>Panel de Usuarios</h3>
+          <div className='d-flex justify-content-end w-100'>
+            <Button className='my-4' type='primary' onClick={handleAddUsuarioClick}>Agregar Usuario</Button>
+          </div>
+            <Table
+              className='table__container'
+              columns={Columns}
+              dataSource={mappedUsuarios}
+              responsive
+              bordered
+              size='middle'
+              scroll={{
+                x: 1000,
+              }}
+            />
+            <ModalUsuarios
+            open={modalVisible}
+            initialValues={usuarioData}
+            onCancel={handleCancel}
+            isEdit={isEdit} />
+            </div>
+        </div> 
+      </div>
+  )
+}
 
-export default UsuariosAdmin
+export default HabitacionesAdmin

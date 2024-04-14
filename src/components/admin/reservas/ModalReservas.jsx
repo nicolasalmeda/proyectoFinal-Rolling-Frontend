@@ -4,7 +4,7 @@ import {Form,Container,Badge} from 'react-bootstrap';
 import { useDispatch,useSelector } from 'react-redux';
 import { get, useForm } from "react-hook-form";
 import moment from 'moment';
-import { getReservas, updateReserva, addReserva, getReservasByIdHabitacion, getHabitaciones,cleanStateFechaReservas } from '../../../Redux/actions/actions';
+import { getReservas, updateReserva, addReserva, getReservasByIdHabitacion, getHabitaciones,cleanStateFechaReservas, getUsuarios } from '../../../Redux/actions/actions';
 import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 
 
@@ -14,6 +14,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   const dispatch = useDispatch();
   let disabledDates = useSelector((state) => state.reservas.fechasReservas);
   const habitaciones = useSelector((state) => state.habitaciones.habitaciones);
+  const usuarios = useSelector((state) => state.usuarios.usuarios);
   
   const {
     register,
@@ -188,9 +189,12 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
             })}
           >
             <option value="">Seleccione una opcion</option>
-            <option value="6611f3e5c909405229064483">Usuario1</option>
-            <option value="6611f486c909405229064484">Enzo</option>
-            
+            {usuarios.map((usuario) => (
+              <option key={usuario._id} value={usuario._id}>
+                {usuario.nombre} {usuario.apellido}
+              </option>
+            ))
+            }
           </Form.Select>
           <Form.Group className="mb-3 mt-3" controlId="formReser">
           <Form.Label>Fechas Reservadas</Form.Label>

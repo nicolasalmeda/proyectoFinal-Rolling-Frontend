@@ -2,7 +2,8 @@ import { LOGIN_USUARIO, GET_USUARIOS, DELETE_USUARIO, ADD_USUARIO, UPDATE_USUARI
 
 const initialState = {
     token: null,
-    error: null
+    error: null,
+    usuarios: [],
 };
 
 const usuarioReducer = (state = initialState, action) => {
@@ -38,7 +39,7 @@ const usuarioReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     usuarios: state.usuarios.map(usuario =>
-                        usuario._id === action.payload.id ? action.payload.usuario : usuario
+                        usuario._id === action.payload._id ? action.payload.usuario : usuario
                     ),
                     loading: false,
                     error: null
