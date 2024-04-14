@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import logo from '../../assets/img/logo-bell.png'
 import './admin.css'
 
 
@@ -25,8 +26,7 @@ const NavAdmin = () => {
   <Navbar bg="light" expand={false} className="adminNavBar">
     <Container>
       <Navbar.Brand as={Link} to="/admin">
-      
-        Hotelería
+        Panel Administrador
       </Navbar.Brand>
       <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
       <Navbar.Offcanvas
@@ -35,7 +35,13 @@ const NavAdmin = () => {
         className="bg-white"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Hotelería</Offcanvas.Title>
+          <Offcanvas.Title><img
+              alt="logo"
+              src={logo}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}Panel Administrador Hotelería</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="justify-content-end flex-grow-1 pe-3">
