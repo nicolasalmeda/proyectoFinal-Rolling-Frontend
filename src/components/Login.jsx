@@ -10,9 +10,13 @@ const Login = () => {
     const error = useSelector(state => state.usuario.error);
   
     const handleLogin = async () => {
-      dispatch(loginUsuario(email, password));
+      dispatch(loginUsuario(email, password))
+        .then((response) => {
+          if (response.token) {
+            sessionStorage.setItem('token', response.token);
+          }
+        });
     };
-  
     return (
       <div>
         <h2>Login</h2>
