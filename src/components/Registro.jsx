@@ -15,7 +15,7 @@ const Registro = () => {
       apellido: ''
     });
 
-    function validate(input) {
+    function validate(formData) {
       let errors = {};
       if (!formData.nombre) {
         errors.nombre = 'El nombre es requerido';

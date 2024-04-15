@@ -6,6 +6,7 @@ export const GET_HABITACIONES = 'GET_HABITACIONES';
 export const DELETE_HABITACION = 'DELETE_HABITACION';
 export const ADD_HABITACION = 'ADD_HABITACION';
 export const UPDATE_HABITACION = 'UPDATE_HABITACION';
+export const GET_HABITACION= 'GET_HABITACION';
 
 
 //HABITACIONES
@@ -19,6 +20,23 @@ export const getHabitaciones = () => {
                     habitaciones: response.data,
                     allHabitaciones: response.data
                 }
+            });
+        } catch (error) {
+            dispatch({
+                type: 'HABITACIONES_ERROR',
+                payload: error.message
+            });
+        }
+    }
+}
+
+export const getHabitacion = (id) => {
+    return async (dispatch) => {
+        try{
+            const response = await axios.get(`/habitaciones/${id}`);
+            dispatch({
+                type: GET_HABITACION,
+                payload: response.data
             });
         } catch (error) {
             dispatch({

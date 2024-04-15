@@ -42,7 +42,7 @@ const Login = () => {
     }
   
     const handleLogin = async () => {
-      dispatch(loginUsuario(input.email, input.password));
+      dispatch(loginUsuario(input.email, input.password))
         .then((response) => {
           if (response.token) {
             sessionStorage.setItem('token', response.token);

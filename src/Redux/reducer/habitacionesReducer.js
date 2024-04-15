@@ -3,11 +3,13 @@ import {
   DELETE_HABITACION,
   ADD_HABITACION,
   UPDATE_HABITACION,
+  GET_HABITACION,
 } from '../actions/actions';
 
 const initialState = {
   habitaciones: [],
   allHabitaciones: [],
+  habitacion: [],
 };
 
 
@@ -21,6 +23,13 @@ const habitacionesReducer = (state = initialState, action) => {
                 allHabitaciones: action.payload.habitaciones,
                 error: null,
             }
+          
+        case GET_HABITACION:
+          return {
+            ...state,
+            habitacion: action.payload,
+            error: null,
+          }
         
         case DELETE_HABITACION:
           return {
