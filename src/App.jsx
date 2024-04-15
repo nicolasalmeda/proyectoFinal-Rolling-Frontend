@@ -15,6 +15,7 @@ import Footer from "./components/common/Footer.jsx";
 import Error404 from "./components/Error404.jsx";
 import Login from "./components/Login.jsx";
 import Registro from "./components/Registro.jsx";
+import Detalle from "./components/detalle/Detalle.jsx";
 import './App.css'
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route exact path="/admin/usuarios" element={<UsuariosAdmin/>} />
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/registro" element={<Registro/>}/>
+        <Route exact path='/habitacion/:id' element={<Detalle/>}/>
         <Route exact path="*" element={<Error404/>}/>
       </Routes>
       <Footer/>

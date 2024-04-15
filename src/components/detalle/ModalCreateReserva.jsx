@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button,notification } from 'antd';
 import {Form,Container,Badge} from 'react-bootstrap';
 import { useDispatch,useSelector } from 'react-redux';
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import moment from 'moment';
-import { getReservas, updateReserva, addReserva, getReservasByIdHabitacion, getHabitaciones,cleanStateFechaReservas, getUsuarios } from '../../../Redux/actions/actions';
+import { getReservas, updateReserva, addReserva, getReservasByIdHabitacion,cleanStateFechaReservas } from '../../Redux/actions/actions';
 import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 
 
 
 
-const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
+const ModalCreateReserva = ({ open, onCancel, initialValues}) => {
   const dispatch = useDispatch();
   let disabledDates = useSelector((state) => state.reservas.fechasReservas);
-  const habitaciones = useSelector((state) => state.habitaciones.habitaciones);
-  const usuarios = useSelector((state) => state.usuarios.usuarios);
+
+  console.log(initialValues)
   
   const {
     register,
@@ -31,32 +31,24 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
 
   const cargarDatosProducto =  () => {
     if (initialValues){
-    setValue('numero_reserva', initialValues.numero_reserva || '');
+    setValue('numero_reserva', initialValues.numero_reserva || Math.floor(Math.random() * 100));
     setValue('usuario', initialValues.usuario || '');
     setValue('habitacion', initialValues.habitacion || '');
-    setValue('fecha_entrada', initialValues.fecha_entrada || '');
-    setValue('fecha_salida', initialValues.fecha_salida || '');
+    
     }
   }
 
-  useEffect(() => {
-    dispatch(getHabitaciones());
-  }, [dispatch]);
 
 
   useEffect(() => {
     reset()
     dispatch(cleanStateFechaReservas());
-    if (isEdit) {
-      setTitle('Editar Reserva');
-      setSubmitText('Actualizar Reserva');
-      cargarDatosProducto();
-      dispatch(getReservasByIdHabitacion(initialValues.habitacion));
-    } else {
-      setTitle('Crear Reserva');
-      setSubmitText('Crear Reserva');
-    }
-  }, [isEdit, initialValues]);
+    setTitle('Crear Reserva');
+    setSubmitText('Crear Reserva');
+    cargarDatosProducto();
+    dispatch(getReservasByIdHabitacion(initialValues.habitacion));
+  
+  }, [initialValues]);
 
   const onSubmit = async (values) => {
     try{
@@ -159,7 +151,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formTipo">
-          <Form.Label>Habitación*</Form.Label>
+          <Form.Label>Habitación N°*</Form.Label>
           <Form.Select
             {...register("habitacion", {
               required: "El número de habitacion de habitación es obligatorio",
@@ -169,13 +161,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
               dispatch(getReservasByIdHabitacion(habitacionId));
             }}
           >
-            <option value="">Seleccione una opcion</option>
-            {habitaciones.map((habitacion) => (
-              <option key={habitacion._id} value={habitacion._id}>
-                {habitacion.numero}
-              </option>
-            ))
-            }
+            <option value={initialValues.habitacion}>{initialValues.habitacion_numero}</option>
           </Form.Select>
           <Form.Text className="text-danger">
             {errors.habitacion?.message}
@@ -189,15 +175,11 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
             })}
           >
             <option value="">Seleccione una opcion</option>
-            {usuarios.map((usuario) => (
-              <option key={usuario._id} value={usuario._id}>
-                {usuario.nombre} {usuario.apellido}
-              </option>
-            ))
-            }
           </Form.Select>
-          <Form.Text className="text-danger">{errors.usuario?.message}</Form.Text>
-          </Form.Group>
+          <Form.Text className="text-danger">
+            {errors.usuario?.message}
+            </Form.Text>
+        </Form.Group>
           <Form.Group className="mb-3 mt-3" controlId="formReser">
           <Form.Label>Fechas Reservadas</Form.Label>
           <Container fluid className="d-flex justify-content-center flex-wrap">
@@ -207,8 +189,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
               </Badge>
             ))}
           </Container>
-          
-        </Form.Group>
+          </Form.Group>
         <Form.Group className="mb-3" controlId="formFechaIngreso">
           <Form.Label>Fecha de Ingreso*</Form.Label>
           <Form.Control
@@ -268,4 +249,4 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   );
 };
 
-export default ModalReservas;
+export default ModalCreateReserva;
