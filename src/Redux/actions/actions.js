@@ -235,9 +235,6 @@ export const addReserva = (reserva) => {
     return async (dispatch) => {
         try {
             const response = await axios.post('/reservas', reserva);
-            const habitacionId = reserva.habitacionId;
-            await axios.put(`/habitaciones/${habitacionId}`, { disponible: "no disponible" });
-            
             dispatch({
                 type: ADD_RESERVA,
                 payload: response.data,
