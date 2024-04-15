@@ -2,9 +2,11 @@ import React , { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUsuario } from '../Redux/actions/actions';
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [input, setInput] = useState({
       email: '',
       password: '',
@@ -42,12 +44,17 @@ const Login = () => {
     }
   
     const handleLogin = async () => {
-      dispatch(loginUsuario(input.email, input.password))
-        .then((response) => {
-          if (response.token) {
+      try {
+        const response = await dispatch(loginUsuario(input.email, input.password));
+        if (response.token) {
             sessionStorage.setItem('token', response.token);
-          }
-        });
+            navigate('/')
+        } else {
+            throw new Error('Credenciales inválidas');
+        }
+    } catch (error) {
+        alert("Ocurrió un error al iniciar sesión: " + error.message);
+    }
     };
     return (
       <div className='mainContainer py-4'>
