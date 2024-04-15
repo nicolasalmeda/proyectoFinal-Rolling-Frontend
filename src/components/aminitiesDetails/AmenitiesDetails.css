@@ -1,3 +1,35 @@
-.img-amenities-1{
-    width: 500px;
-}
+/* AmenitiesDetails.css */
+.carousel-amenities {
+    width: 60%; /* Ajusta el ancho del carrusel según sea necesario */
+    margin: auto; /* Centra el carrusel horizontalmente */
+  }
+  
+  .img-amenities-1 {
+    width: 100%;
+    height: auto; /* Para mantener la proporción de la imagen */
+    object-fit: contain; /* Ajusta la imagen dentro de su contenedor sin distorsionarla */
+  }
+  
+  /* Ajusta el tamaño de la paginación */
+  .ant-carousel .slick-dots li button {
+    font-size: 30px; /* Ajusta el tamaño de la paginación según sea necesario */
+  }
+  
+  /* Estilos adicionales para hacer el carrusel responsive */
+  @media screen and (max-width: 768px) {
+    .carousel-amenities {
+      width: 90%; /* Ajusta el ancho del carrusel para pantallas más pequeñas */
+    }
+  }
+
+  .amenitiesDetails-p{
+    font-family: "Pluto Regular";
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 400;
+    word-spacing: 3px;
+    color: #464e52;
+  } 
+  .container-detailsAmenities{
+    box-sizing: border-box
+  }
