@@ -1,0 +1,70 @@
+.card-container-amenities {
+    width:30%;
+    margin:0;
+    border-radius: 10px;
+    border: solid;
+  }
+  
+  .title-amenities {
+    margin: 0;
+  }
+  
+  .description-amenities {
+    margin:0;
+  }
+
+  .img-amenities{
+    width: 70px !important;
+  }
+  
+  .amenities-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 2560px) {
+    .card-container-amenities {
+      width: 40%;
+      margin: 2.5%;
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    .card-container-amenities {
+      width: 45%;
+      margin: 2.5%;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .card-container-amenities {
+      width: 45%;
+      margin: 2.5%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .card-container-amenities {
+      width: 45%;
+      margin: 2.5%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .card-container-amenities {
+      width: 90%;
+      margin: 5%;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .amenities-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .card-container-amenities {
+      width: calc(100% - 2%); /* Para compensar el margen, restando el 2% */
+      margin: 1%; /* Define el margen deseado */
+    }
+  }
+  

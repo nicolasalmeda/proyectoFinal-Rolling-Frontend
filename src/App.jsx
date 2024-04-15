@@ -1,10 +1,8 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./Redux/store/store.js";
+import React, { useEffect } from 'react'
+import { BrowserRouter, Routes, Route,   } from "react-router-dom";
 import './index.css'
 import LayoutAdmin from "./components/admin/LayoutAdmin.jsx";
 import HabitacionesAdmin from "./components/admin/habitaciones/HabitacionesAdmin.jsx";
@@ -17,17 +15,29 @@ import Login from "./components/Login.jsx";
 import Registro from "./components/Registro.jsx";
 import Detalle from "./components/detalle/Detalle.jsx";
 import './App.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Home from './components/home/Home';
+import DetallesAminities from './components/aminitiesDetails/DetallesAminities.jsx'
+import { useDispatch } from "react-redux"
+import { getHabitaciones } from "./Redux/actions/actions";
+
 
 function App() {
+  const dispatch = useDispatch();
 
+  useEffect(()=>{
+    dispatch(getHabitaciones())
+  }, [])
+  
   return (
-  <Provider store={store}>
+  <>
     <BrowserRouter>
       <Menu/>
       <Routes>
-        <Route path="/" element={<div className="mainContainer">
-          <h1>pagina funcionando</h1> 
-          </div>}/>
+        <Route path="/" element={<Home className="mainContainer">
+
+          </Home>}/>
         <Route exact path="/admin" element={<LayoutAdmin/>}/>
         <Route exact path="/admin/habitaciones" element={<HabitacionesAdmin/>} />
         <Route exact path="/admin/reservas" element={<ReservaAdmin/>} />
@@ -36,10 +46,11 @@ function App() {
         <Route exact path="/registro" element={<Registro/>}/>
         <Route exact path='/habitacion/:id' element={<Detalle/>}/>
         <Route exact path="*" element={<Error404/>}/>
+        <Route path="/servicio/:amenities" element={<DetallesAminities/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>
-  </Provider>
+  </>
 )
 
 }
