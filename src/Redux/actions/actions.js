@@ -119,6 +119,7 @@ export const loginUsuario = (email, password) => {
                 type: LOGIN_USUARIO,
                 payload: response.data.token
             });
+            return response.data;
         } catch (error) {
             dispatch({
                 type: USUARIOS_ERROR,

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUsuario } from '../Redux/actions/actions'; 
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Registro = () => {
     const dispatch = useDispatch();
+    
     const error = useSelector(state => state.usuarios.error);
     const [errors, setErrors] = useState({});
-
+    const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -52,6 +54,8 @@ const Registro = () => {
 
     const handleRegistro = async () => {
       dispatch(createUsuario(formData)); 
+      alert('Usuario creado correctamente');
+      navigate('/login');
     };
   
     return (
