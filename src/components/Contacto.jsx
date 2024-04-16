@@ -3,7 +3,7 @@ import '../css/contacto.css'
 
 const Contacto = () => {
   return (
-    <div className='mainContainer'>
+    <div className='mainContainer backgound__color--nav'>
       <div className="container__contacto mt-5">
       <h2>Contacto</h2>
       <form>

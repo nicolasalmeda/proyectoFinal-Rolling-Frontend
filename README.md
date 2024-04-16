@@ -42,6 +42,6 @@ El objetivo del frontend es proporcionar una interfaz amigable y funcional para 
 ## Grupo N3 - Frontend
 
 Integrantes:
-- [Nombre del Integrante 1](enlace_perfil_github)
+- [Lagoria Almeda Nicolás](https://github.com/nicolasalmeda)
 - [Nombre del Integrante 2](enlace_perfil_github)
 - [Nombre del Integrante 3](enlace_perfil_github)
