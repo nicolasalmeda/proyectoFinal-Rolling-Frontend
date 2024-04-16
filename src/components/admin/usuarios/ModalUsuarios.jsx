@@ -161,8 +161,9 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
             {errors.nombreProducto?.message}
           </Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formNombreUsuario">
-          <Form.Label>Apellido*</Form.Label>
+        {!isEdit && (
+          <Form.Group className="mb-3" controlId="formNombreUsuario">
+          <Form.Label>Contraseña*</Form.Label>
           <Form.Control
             type="password"
             placeholder="**********"
@@ -182,6 +183,8 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
             {errors.password?.message}
           </Form.Text>
         </Form.Group>
+        )}
+        
         <Form.Group className="mb-3" controlId="formTipo">
           <Form.Label>Rol*</Form.Label>
           <Form.Select

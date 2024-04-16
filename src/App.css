@@ -9,8 +9,8 @@
 }
 
 .logo{
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   margin: 0 auto;
 }
 
@@ -31,4 +31,22 @@
 .danger__error{
   max-width: 500px;
   color: red;
+}
+
+.backgound__color--footer{
+  background-color: #402D16;
+}
+
+.backgound__color--error{
+  background-color: #A0A603;
+}
+
+.backgound__color--nav{
+  background-color: #A6904E;
+
+}
+
+.button__color{
+  background-color: #F2CB05;
+  font-weight: 700;
 }
