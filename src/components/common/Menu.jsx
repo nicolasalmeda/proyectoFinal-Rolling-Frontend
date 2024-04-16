@@ -28,7 +28,7 @@ const Menu = () => {
            <NavLink to="/" className='nav-link text-white'>Inicio</NavLink>
            <NavLink to="/quienes" className='nav-link text-white'>Quiénes Somos</NavLink>
            <NavLink to="/contacto" className='nav-link text-white'>Contacto</NavLink>
-           <NavLink to="/galeria" className='nav-link text-white'>Galería de Imágenes</NavLink>
+           <NavLink to="/galeria" className='nav-link text-white'>Galería</NavLink>
            <NavLink to="/habitaciones" className='nav-link text-white'>Cátalogo de habitaciones</NavLink>
            <NavDropdown title="Mi Cuenta" id="basic-nav-dropdown" className='text-white'>
               {token ? (

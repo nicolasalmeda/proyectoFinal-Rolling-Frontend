@@ -8,13 +8,13 @@ const Footer = () => {
       <div className='container text-light'>
         <div className='row'>
           <div className='col-md-4 col-lg-3'>
-            <h5>Información de contacto</h5>
-            <p><i className="bi bi-envelope-at-fill"></i> Correo: rolling@hotel.common</p>
-            <p><i className="bi bi-telephone-fill"></i> Telefono: 123456789</p>
-            <p><i className="bi bi-geo-alt-fill"></i> Dirección: Calle falsa 123</p>
+            <h5><strong>Información de contacto</strong></h5>
+            <p><i className="bi bi-envelope-at-fill"></i> Correo: hi@rollingcode.co</p>
+            <p><i className="bi bi-telephone-fill"></i> Telefono: 0381 578-3030</p>
+            <p><i className="bi bi-geo-alt-fill"></i> Dirección: Gral. Paz 576, T4000 San Miguel de Tucumán, Tucumán</p>
           </div>
           <div className='col-md-4 col-lg-3'>
-            <h5>Redes sociales</h5>
+            <h5><strong>Redes sociales</strong></h5>
             <Link to={'*'} className='nav-link text-white'>
               <p><i className="bi bi-facebook"></i> Facebook</p>
             </Link>
@@ -26,18 +26,26 @@ const Footer = () => {
             </Link>
           </div>
           <div className='col-md-4 col-lg-3'>
-            <h5>Mapa del sitio</h5>
-            <p>Inicio</p>
-            <p>Usuarios</p>
-            <p>Habitaciones</p>
-            <p>Reservas</p>
+            <h5><strong>Mapa del sitio</strong></h5>
+            <Link to='/' className='nav-link text-white'>
+              <p>Inicio</p>
+            </Link>
+            <Link to='/contacto' className='nav-link text-white'>
+              <p>Contacto</p>
+            </Link>
+            <Link to='/galeria' className='nav-link text-white'>
+              <p>Galería</p>
+              </Link>
+            <Link to='/quienes' className='nav-link text-white'>
+              <p>Quiénes Somos</p>
+              </Link>
           </div>
-          <div className='col-md-12 col-lg-3 text-center'>
+          <div className='col-md-12 col-lg-3 text-center d-flex flex-column justify-content-center'>
             <img src={logo} 
             alt='logo'
             className='logo mb-3'
-            width="30"
-            height="30"
+            width="25"
+            height="25"
             />
             <p>© 2024 Rolling Code School</p>
           </div>
