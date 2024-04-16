@@ -20,6 +20,10 @@
 
 .btn-details {
   font-size: 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  background-color: #f2cb05;
 }
 
 @media screen and (max-width: 319px) {
