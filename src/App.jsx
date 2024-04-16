@@ -43,7 +43,7 @@ function App() {
       <Menu/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-          {isLoggedIn && isAdmin ? (
+          {/* {isLoggedIn && isAdmin ? (
             <>
               <Route path="/admin" element={<LayoutAdmin />} />
               <Route path="/admin/habitaciones" element={<HabitacionesAdmin />} />
@@ -52,7 +52,11 @@ function App() {
             </>
           ) : (
             <Route exact path="*"  />
-          )}
+          )} */}
+          <Route path="/admin" element={<LayoutAdmin />} />
+              <Route path="/admin/habitaciones" element={<HabitacionesAdmin />} />
+              <Route path="/admin/reservas" element={<ReservaAdmin />} />
+              <Route path="/admin/usuarios" element={<UsuariosAdmin />} />
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/registro" element={<Registro/>}/>
         <Route exact path="/habitacion/:id" element={<Detalle/>}/>
