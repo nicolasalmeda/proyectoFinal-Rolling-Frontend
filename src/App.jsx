@@ -19,6 +19,12 @@ import Detalle from "./components/detalle/Detalle.jsx";
 import Galeria from "./components/galeria/Galeria.jsx";
 import Contacto from "./components/Contacto.jsx";
 import './App.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Home from './components/home/Home';
+import DetallesAminities from './components/aminitiesDetails/DetallesAminities.jsx'
+import RoomsSection from "./components/home/RoomsSection.jsx";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!sessionStorage.getItem('token'));
@@ -30,8 +36,9 @@ function App() {
     setIsLoggedIn(!!token);
     setIsAdmin(rol === 'true');
   }, []);
+  
   return (
-  <Provider store={store}>
+  <>
     <BrowserRouter>
       <Menu/>
       <Routes>
@@ -54,10 +61,12 @@ function App() {
         <Route exact path="/galeria" element={<Galeria/>}/>
         <Route exact path="/contacto" element={<Contacto/>}/>
         <Route exact path="*" element={<Error404/>}/>
+        <Route path="/servicio/:amenities" element={<DetallesAminities/>} />
+        <Route exact path="/habitaciones" element={<RoomsSection/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>
-  </Provider>
+  </>
 )
 
 }

@@ -11,7 +11,8 @@ const Menu = () => {
  };
 
  return (
-   <Navbar expand="lg" data-bs-theme="dark" className='backgound__color--nav'>
+   <Navbar expand="lg" data-bs-theme="dark" className='bg-dark text-light sticky-top'>
+
      <Container>
        <Navbar.Brand as={Link} to='/' className=''>
          <img
