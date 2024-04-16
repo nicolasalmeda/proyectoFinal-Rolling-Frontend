@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk/dist/redux-thunk.esm.js';
+import {thunk} from 'redux-thunk';
 import habitacionesReducer from '../reducer/habitacionesReducer';
 import usuarioReducer from '../reducer/usuarioReducer'; 
 import reservasReducer from '../reducer/reservasReducer';
