@@ -46,15 +46,17 @@ const Login = () => {
     const handleLogin = async () => {
       try {
         const response = await dispatch(loginUsuario(input.email, input.password));
-        if (response.token) {
-            sessionStorage.setItem('token', response.token);
-            navigate('/')
+        if (response.token && response.id) {
+          sessionStorage.setItem('token', response.token);
+          localStorage.setItem('userId', response.id);
+          localStorage.setItem('rol', response.rol)
+          navigate('/');
         } else {
-            throw new Error('Credenciales inválidas');
+          throw new Error('Credenciales inválidas');
         }
-    } catch (error) {
+      } catch (error) {
         alert("Ocurrió un error al iniciar sesión: " + error.message);
-    }
+      }
     };
     return (
       <div className='mainContainer py-4'>

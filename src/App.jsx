@@ -1,8 +1,8 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, {useEffect, useState} from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Redux/store/store.js";
 import './index.css'
@@ -19,7 +19,15 @@ import Detalle from "./components/detalle/Detalle.jsx";
 import './App.css'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!sessionStorage.getItem('token'));
+  const [isAdmin, setIsAdmin] = useState(localStorage.getItem('rol') === 'true');
 
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    const rol = localStorage.getItem('rol');
+    setIsLoggedIn(!!token);
+    setIsAdmin(rol === 'true');
+  }, []);
   return (
   <Provider store={store}>
     <BrowserRouter>
@@ -28,10 +36,16 @@ function App() {
         <Route path="/" element={<div className="mainContainer">
           <h1>pagina funcionando</h1> 
           </div>}/>
-        <Route exact path="/admin" element={<LayoutAdmin/>}/>
-        <Route exact path="/admin/habitaciones" element={<HabitacionesAdmin/>} />
-        <Route exact path="/admin/reservas" element={<ReservaAdmin/>} />
-        <Route exact path="/admin/usuarios" element={<UsuariosAdmin/>} />
+          {isLoggedIn && isAdmin ? (
+            <>
+              <Route path="/admin" element={<LayoutAdmin />} />
+              <Route path="/admin/habitaciones" element={<HabitacionesAdmin />} />
+              <Route path="/admin/reservas" element={<ReservaAdmin />} />
+              <Route path="/admin/usuarios" element={<UsuariosAdmin />} />
+            </>
+          ) : (
+            <Route exact path="*"  />
+          )}
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/registro" element={<Registro/>}/>
         <Route exact path='/habitacion/:id' element={<Detalle/>}/>
