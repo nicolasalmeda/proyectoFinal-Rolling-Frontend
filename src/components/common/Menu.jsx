@@ -11,9 +11,9 @@ const Menu = () => {
  };
 
  return (
-   <Navbar expand="lg" data-bs-theme="dark" className='bg-dark text-light'>
+   <Navbar expand="lg" data-bs-theme="dark" className='backgound__color--nav'>
      <Container>
-       <Navbar.Brand as={Link} to='/' className='text-white'>
+       <Navbar.Brand as={Link} to='/' className=''>
          <img
            alt="logo"
            src={logo}
@@ -30,7 +30,7 @@ const Menu = () => {
            <NavLink to="/contacto" className='nav-link text-white'>Contacto</NavLink>
            <NavLink to="/galeria" className='nav-link text-white'>Galería</NavLink>
            <NavLink to="/habitaciones" className='nav-link text-white'>Cátalogo de habitaciones</NavLink>
-           <NavDropdown title="Mi Cuenta" id="basic-nav-dropdown" className='text-white'>
+           <NavDropdown title="Mi Cuenta" id="basic-nav-dropdown" className='text-white backgound__color--nav'>
               {token ? (
                 <NavDropdown.Item as={Link} to="/" onClick={handleLogout} className="text-white">Cerrar sesión</NavDropdown.Item>
               ) : (

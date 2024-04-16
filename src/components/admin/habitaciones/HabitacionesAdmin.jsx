@@ -131,7 +131,7 @@ const HabitacionesAdmin = () => {
       <NavAdmin />
       <div className='background__color d-flex flex-grow-1 mb-2 m-4 rounded p-4'>
         <div className='d-flex flex-column w-100'>
-          <h3 className='w-100 text-center'>Panel de Habitaciones</h3>
+          <h2 className='w-100 text-center'>Panel de Habitaciones</h2>
           <div className='d-flex justify-content-end w-100'>
             <Button className='my-4' type='primary' onClick={handleAddRoomClick}>Agregar Habitacion</Button>
           </div>
