@@ -13,8 +13,6 @@ import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 const ModalCreateReserva = ({ open, onCancel, initialValues}) => {
   const dispatch = useDispatch();
   let disabledDates = useSelector((state) => state.reservas.fechasReservas);
-
-  console.log(initialValues)
   
   const {
     register,
@@ -33,8 +31,7 @@ const ModalCreateReserva = ({ open, onCancel, initialValues}) => {
     if (initialValues){
     setValue('numero_reserva', initialValues.numero_reserva || Math.floor(Math.random() * 100));
     setValue('usuario', initialValues.usuario || '');
-    setValue('habitacion', initialValues.habitacion || '');
-    
+    setValue('habitacion', initialValues.habitacion || '');    
     }
   }
 
@@ -52,13 +49,8 @@ const ModalCreateReserva = ({ open, onCancel, initialValues}) => {
 
   const onSubmit = async (values) => {
     try{
-      if (!isEdit) {
         await dispatch(addReserva(values));
         openNotification(' Reserva creada',true);
-      } else {
-        await dispatch(updateReserva(initialValues._id, values));
-        openNotification('Reserva actualizada',true);
-      }
       await finish();
     } catch(err){
       openNotification( 'Hubo un problema',false);
@@ -95,29 +87,21 @@ const ModalCreateReserva = ({ open, onCancel, initialValues}) => {
     const date = moment(dateString, 'DD/MM/YYYY').format('DD/MM/YYYY');
     const result = disabledDates.includes(date);
     
-    if(isEdit && initialValues.fecha_entrada === date){
-      return true;
-    }else{
       if (result) {
         return false;
       }else{
         return true;
-      }
     } 
   }
 
   const isDateDisabledSalida = (dateString) => {
     const date = moment(dateString, 'DD/MM/YYYY').format('DD/MM/YYYY');
     const result = disabledDates.includes(date);
-    if(isEdit && initialValues.fecha_salida === date){
-      return true;
-    }else{
       if (result) {
         return false;
       }else{
         return true;
       }
-    } 
   }
 
   return (
@@ -174,7 +158,7 @@ const ModalCreateReserva = ({ open, onCancel, initialValues}) => {
               required: "El usuario es obligatorio",
             })}
           >
-            <option value="">Seleccione una opcion</option>
+            <option value={initialValues.usuario}>{initialValues.usuario}</option>
           </Form.Select>
           <Form.Text className="text-danger">
             {errors.usuario?.message}
