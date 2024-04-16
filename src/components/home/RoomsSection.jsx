@@ -63,6 +63,7 @@ const RoomsSection = () => {
                         tipo={habitacion.tipo}
                         descripcion={habitacion.descripcion}
                         precio={habitacion.precio}
+                        id={habitacion._id}
                     />
                 ))}
             </div>

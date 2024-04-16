@@ -21,7 +21,7 @@ import Contacto from "./components/Contacto.jsx";
 import './App.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Home from './components/home/Home';
+import Home from './components/home/Home.jsx';
 import DetallesAminities from './components/aminitiesDetails/DetallesAminities.jsx'
 import RoomsSection from "./components/home/RoomsSection.jsx";
 
@@ -42,9 +42,7 @@ function App() {
     <BrowserRouter>
       <Menu/>
       <Routes>
-        <Route path="/" element={<div className="mainContainer">
-          <h1>pagina funcionando</h1> 
-          </div>}/>
+        <Route path="/" element={<Home/>}/>
           {isLoggedIn && isAdmin ? (
             <>
               <Route path="/admin" element={<LayoutAdmin />} />
