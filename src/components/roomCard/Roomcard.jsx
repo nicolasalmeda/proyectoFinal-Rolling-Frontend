@@ -11,7 +11,7 @@ const Roomcard = ({ imagen, tipo, descripcion, precio }) => {
   };
 
   return (
-    <div className="col-12 col-md-6 col-lg-4 mb-5 mt-5">
+    <div className="col-12 col-md-6 col-lg-4 mb-5 mt-5 container-card">
       <div className="d-flex align-items-center justify-content-center">
         <div>
           <Card className=" border-0">
@@ -20,7 +20,7 @@ const Roomcard = ({ imagen, tipo, descripcion, precio }) => {
             </div>
             <Card.Body>
               <Card.Title className="text-uppercase font-weight-bold text-gray-700">
-                HABITACIÓN {tipo}
+                Habitacion Tipo {tipo}
               </Card.Title>
               <Card.Text className="fs-3 text-gray-900">${precio}</Card.Text>
             </Card.Body>
@@ -29,8 +29,8 @@ const Roomcard = ({ imagen, tipo, descripcion, precio }) => {
               <Card.Text className="text-3xl text-gray-900">
                 {descripcion}
               </Card.Text>
-              <Button type="primary" shape="round" className=" ">
-                Detalles
+              <Button type="primary" shape="round" className="mt-auto">
+                Reservar Ahora
               </Button>
             </Card.Footer>
             <Button

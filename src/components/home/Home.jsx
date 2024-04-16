@@ -1,5 +1,4 @@
 import './HomeStyle.css'
-import { Button } from 'antd';
 import RoomsSection from './RoomsSection';
 import DetailsHotel from './detailsHotel/DetailsHotel';
 import Amenities from './animities/Amenities';

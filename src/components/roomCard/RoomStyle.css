@@ -1,11 +1,10 @@
-
 .card-image{
     height: 250px !important;
     
 }
 
   .card-image-container {
-    max-width: 300px;
+    max-width: 800px;
   }
   
   .icon-favorit{
@@ -13,12 +12,6 @@
     top: 1%;
     right: 2%;
   }
-
-  
-  /* .bg-card{
-    background-color: #d8dbcc;
-  } */
-
 
 
   @media (max-width: 576px) {

@@ -1,7 +1,6 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route,   } from "react-router-dom";
 import './index.css'
 import LayoutAdmin from "./components/admin/LayoutAdmin.jsx";
@@ -19,16 +18,10 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Home from './components/home/Home';
 import DetallesAminities from './components/aminitiesDetails/DetallesAminities.jsx'
-import { useDispatch } from "react-redux"
-import { getHabitaciones } from "./Redux/actions/actions";
+import RoomsSection from "./components/home/RoomsSection.jsx";
 
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(()=>{
-    dispatch(getHabitaciones())
-  }, [])
   
   return (
   <>
@@ -47,6 +40,7 @@ function App() {
         <Route exact path='/habitacion/:id' element={<Detalle/>}/>
         <Route exact path="*" element={<Error404/>}/>
         <Route path="/servicio/:amenities" element={<DetallesAminities/>} />
+        <Route exact path="/habitaciones" element={<RoomsSection/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>
