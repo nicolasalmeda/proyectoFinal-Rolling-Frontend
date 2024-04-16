@@ -31,7 +31,7 @@ const Menu = () => {
            <NavLink to="/contacto" className='nav-link text-white'>Contacto</NavLink>
            <NavLink to="/galeria" className='nav-link text-white'>Galería</NavLink>
            <NavLink to="/habitaciones" className='nav-link text-white'>Cátalogo de habitaciones</NavLink>
-           <NavDropdown title="Mi Cuenta" id="basic-nav-dropdown" className='text-white backgound__color--nav'>
+           <NavDropdown title="Mi Cuenta" id="basic-nav-dropdown" className='text-white bg-dark'>
               {token ? (
                 <NavDropdown.Item as={Link} to="/" onClick={handleLogout} className="text-white">Cerrar sesión</NavDropdown.Item>
               ) : (

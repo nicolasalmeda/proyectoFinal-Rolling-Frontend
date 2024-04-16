@@ -2,9 +2,12 @@ import { Card } from "react-bootstrap";
 import "./RoomStyle.css";
 import { Button } from "antd";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Roomcard = ({ imagen, tipo, descripcion, precio }) => {
+
+const Roomcard = ({ imagen, tipo, descripcion, precio,id }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
@@ -29,9 +32,11 @@ const Roomcard = ({ imagen, tipo, descripcion, precio }) => {
               <Card.Text className="text-3xl text-gray-900">
                 {descripcion}
               </Card.Text>
-              <Button type="primary" shape="round" className="mt-auto">
-                Reservar Ahora
-              </Button>
+              <Link className="nav-link" to={`/habitacion/${id}`}>
+                <Button type="primary" shape="round" className="mt-auto">
+                  Reservar Ahora
+                </Button>
+              </Link>
             </Card.Footer>
             <Button
               type="primary"
