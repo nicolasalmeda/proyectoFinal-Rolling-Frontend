@@ -21,12 +21,12 @@
 }
 
 #title{
-    position: relative; /* Cambiar la posición a relativa */
+    position: relative; 
     font-family: "Dancing Script", cursive;
     font-size: 36px;
     color: gold; 
     text-decoration: underline; 
-    margin-top: 5000px; /* Ajustar el margen superior según sea necesario */
+    margin-top: 5000px; 
     margin-bottom: 10px;
     text-align: center;
 }
