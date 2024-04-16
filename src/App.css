@@ -7,3 +7,46 @@
 .mainContainer{
   flex-grow: 1;
 }
+
+.logo{
+  width: 75px;
+  height: 75px;
+  margin: 0 auto;
+}
+
+.btn__submit{
+  width: 150px;
+}
+
+.input{
+  max-width: 500px;
+  border-radius: 4px;
+}
+.danger {
+  max-width: 500px;
+  border-radius: 4px;
+  border: red solid 2px;
+}
+
+.danger__error{
+  max-width: 500px;
+  color: red;
+}
+
+.backgound__color--footer{
+  background-color: #402D16;
+}
+
+.backgound__color--error{
+  background-color: #A0A603;
+}
+
+.backgound__color--nav{
+  background-color: #A6904E;
+
+}
+
+.button__color{
+  background-color: #F2CB05;
+  font-weight: 700;
+}

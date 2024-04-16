@@ -1,0 +1,87 @@
+.carousel-amenities {
+  width: 60%;
+  margin: auto;
+}
+
+.img-amenities-1 {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.ant-carousel .slick-dots li button {
+  font-size: 30px;
+}
+
+.amenitiesDetails-p {
+  font-family: "Pluto Regular";
+  font-size: 20px;
+  line-height: 27px;
+  font-weight: 400;
+  word-spacing: 3px;
+  color: #464e52;
+}
+
+.container-detailsAmenities {
+  box-sizing: border-box
+}
+
+@media screen and (max-width: 319px) {
+  .carousel-amenities {
+      width: 100%;
+  }
+  .amenitiesDetails-p {
+      font-size: 16px;
+      line-height: 22px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .carousel-amenities {
+      width: 90%;
+  }
+  .amenitiesDetails-p {
+      font-size: 18px;
+      line-height: 24px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+  .carousel-amenities {
+      width: 80%;
+  }
+  .amenitiesDetails-p {
+      font-size: 18px;
+      line-height: 24px;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .carousel-amenities {
+      width: 70%;
+  }
+  .amenitiesDetails-p {
+      font-size: 19px;
+      line-height: 26px;
+  }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
+  .carousel-amenities {
+      width: 65%;
+  }
+  .amenitiesDetails-p {
+      font-size: 20px;
+      line-height: 27px;
+  }
+}
+
+@media screen and (min-width: 1920px) and (max-width: 2560px) {
+  .carousel-amenities {
+      width: 75%;
+  }
+  .amenitiesDetails-p {
+      font-size: 22px;
+      line-height: 30px;
+  }
+}
