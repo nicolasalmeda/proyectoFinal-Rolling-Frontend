@@ -9,6 +9,7 @@
     z-index: -1; 
   }
   
+  
 .info{
     display: flex; 
     flex-direction: column;
@@ -51,8 +52,8 @@
 .team{
     background-color: darkslategrey;
     padding-bottom: 50px ;
-    padding-left: 250px;
-    padding-right: 250px;
+    padding-left: 350px;
+    padding-right: 30px;
     
 }
 
