@@ -41,6 +41,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
 
   useEffect(() => {
     dispatch(getHabitaciones());
+    dispatch(getUsuarios());
   }, [dispatch]);
 
 
@@ -229,7 +230,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
                 notPastThanToday: value => {
                   const today = moment();
                   const entrada = moment(value, 'DD/MM/YYYY');
-                  return entrada.isSameOrAfter(today) || "La fecha de ingreso debe ser igual o posterior a la fecha actual";
+                  return entrada.isSameOrAfter(today) || "La fecha de ingreso debe ser posterior a la fecha actual";
                 },
                 dateDisabled: value => isDateDisabledEntrada(value) || "La fecha ingresada ya está reservada"
               }

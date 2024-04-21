@@ -95,18 +95,18 @@ const Detalle = () => {
           </div>
 
           <div className="d-flex gap-4 my-4">
+            <button 
+              className="btn btn-info"
+              onClick={handleAnterior} 
+              disabled={indiceHabitacion === 0}>
+              Anterior
+            </button>
             <button
             className="btn btn-info"
               onClick={handleSiguiente}
               disabled={indiceHabitacion === habitaciones.length - 1}
             >
               Siguiente
-            </button>
-            <button 
-              className="btn btn-info"
-              onClick={handleAnterior} 
-              disabled={indiceHabitacion === 0}>
-              Anterior
             </button>
 
           </div>
