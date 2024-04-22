@@ -292,8 +292,7 @@ export const updateReserva = (id, reserva) => {
 export const getReservasByIdHabitacion = (id) => { 
     return async (dispatch) => {
         try{
-            const response = await axios.get(`/reservas/habitacion/${id}`);
-            
+            const response = await axios.get(`/reservas/habitacion/${id}`);            
             dispatch({
                 type: GET_RESERVAS_BY_HABITACION,
                 payload: response.data

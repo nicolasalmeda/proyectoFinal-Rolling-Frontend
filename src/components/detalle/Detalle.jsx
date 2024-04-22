@@ -116,7 +116,7 @@ const Detalle = () => {
             onClick={handleAlquilar}
             disabled={habitacionActual.disponibilidad !== "disponible"}
           >
-            Alquilar
+            Reservar
           </button>
         </Container>
       ) : (

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button,notification } from 'antd';
+import { Modal, Button,notification, DatePicker } from 'antd';
 import {Form,Container,Badge} from 'react-bootstrap';
 import { useDispatch,useSelector } from 'react-redux';
-import { get, useForm } from "react-hook-form";
+import {useForm } from "react-hook-form";
 import moment from 'moment';
 import { getReservas, updateReserva, addReserva, getReservasByIdHabitacion, getHabitaciones,cleanStateFechaReservas, getUsuarios } from '../../../Redux/actions/actions';
 import { SmileOutlined, MehOutlined } from '@ant-design/icons';
@@ -15,6 +15,8 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   let disabledDates = useSelector((state) => state.reservas.fechasReservas);
   const habitaciones = useSelector((state) => state.habitaciones.habitaciones);
   const usuarios = useSelector((state) => state.usuarios.usuarios);
+  const [fechaEntrada, setFechaEntrada] = useState(null);
+  const [fechaSalida, setFechaSalida] = useState(null);
   
   const {
     register,
@@ -34,8 +36,8 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
     setValue('numero_reserva', initialValues.numero_reserva || '');
     setValue('usuario', initialValues.usuario || '');
     setValue('habitacion', initialValues.habitacion || '');
-    setValue('fecha_entrada', initialValues.fecha_entrada || '');
-    setValue('fecha_salida', initialValues.fecha_salida || '');
+    setFechaEntrada(moment(initialValues.fecha_entrada , 'DD/MM/YYYY') || null);
+    setFechaSalida(moment(initialValues.fecha_salida,'DD/MM/YYYY') || null);
     }
   }
 
@@ -47,6 +49,8 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
 
   useEffect(() => {
     reset()
+    setFechaEntrada(null);
+    setFechaSalida(null);
     dispatch(cleanStateFechaReservas());
     if (isEdit) {
       setTitle('Editar Reserva');
@@ -60,6 +64,8 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   }, [isEdit, initialValues]);
 
   const onSubmit = async (values) => {
+    values.fecha_entrada = fechaEntrada.format('DD/MM/YYYY');
+    values.fecha_salida = fechaSalida.format('DD/MM/YYYY');
     try{
       if (!isEdit) {
         await dispatch(addReserva(values));
@@ -84,7 +90,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
     notification.success({
       message: `${message}!`,
       description:
-      `El ${message} correctamente`,
+      `${message}`,
       icon: (
         icon ? <SmileOutlined
           style={{
@@ -99,35 +105,26 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
     });
   };
 
-
-  const isDateDisabledEntrada = (dateString) => {
-    const date = moment(dateString, 'DD/MM/YYYY').format('DD/MM/YYYY');
-    const result = disabledDates.includes(date);
-    
-    if(isEdit && initialValues.fecha_entrada === date){
-      return true;
-    }else{
-      if (result) {
-        return false;
-      }else{
+  const validarReservasEnRango = () => {
+    if(isEdit && moment(fechaEntrada,'DD/MM/YYYY').isSame(moment(initialValues.fecha_entrada,'DD/MM/YYYY')) && moment(fechaSalida,'DD/MM/YYYY').isSame(moment(initialValues.fecha_salida,'DD/MM/YYYY'))){
+      return false;
+    }
+    if (fechaEntrada && fechaSalida) {
+      const startDate = fechaEntrada.clone().startOf('day');
+      const endDate = fechaSalida.clone().endOf('day');
+      const reservasEnRango = disabledDates.filter((fecha) => {
+        const reservaDate = moment(fecha, 'DD/MM/YYYY');
+        return reservaDate.isBetween(startDate, endDate, null, '[]');
+      });
+  
+      if (reservasEnRango.length > 0) {
+        openNotification('No se puede reservar en el rango de fechas seleccionado', false);
         return true;
       }
-    } 
-  }
+    }
+    return false;
+  };
 
-  const isDateDisabledSalida = (dateString) => {
-    const date = moment(dateString, 'DD/MM/YYYY').format('DD/MM/YYYY');
-    const result = disabledDates.includes(date);
-    if(isEdit && initialValues.fecha_salida === date){
-      return true;
-    }else{
-      if (result) {
-        return false;
-      }else{
-        return true;
-      }
-    } 
-  }
 
   return (
     <Modal
@@ -212,53 +209,58 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formFechaIngreso">
           <Form.Label>Fecha de Ingreso*</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder="DD/MM/YYYY"
-            {...register("fecha_entrada", {
-              required: "La fecha de ingreso es obligatoria",
-              pattern:{
-                value: /^\d{1,2}\/\d{1,2}\/\d{4}$/g,
-                message: "El formato de la fecha ingresada no es válido"
-              },
-              validate: {
-                notGreaterThanSalida: value => {
-                  const entrada = moment(value, 'DD/MM/YYYY');
-                  const salida = moment(getValues('fecha_salida'), 'DD/MM/YYYY');
-                  return entrada.isSameOrBefore(salida) || "La fecha de ingreso debe ser anterior o igual a la fecha de salida";
-                },
-                notPastThanToday: value => {
-                  const today = moment();
-                  const entrada = moment(value, 'DD/MM/YYYY');
-                  return entrada.isSameOrAfter(today) || "La fecha de ingreso debe ser posterior a la fecha actual";
-                },
-                dateDisabled: value => isDateDisabledEntrada(value) || "La fecha ingresada ya está reservada"
-              }
-            })}
+          <DatePicker
+            disabledDate={(current) => disabledDates.includes(current.format('DD/MM/YYYY')) ||
+              current < moment().startOf('day')}
+            style={{ width: '100%' }}
+            format="DD/MM/YYYY"
+            placeholder="Seleccione una fecha"
+            name='fechaEntrada'
+            value={fechaEntrada}
+            onChange={(date) => setFechaEntrada(date)}
+            required
           />
-          <Form.Text className="text-danger">
-            {errors.fecha_entrada?.message}
-          </Form.Text>
+          {!fechaEntrada && (
+            <Form.Text className="text-danger">
+              La fecha de entrada es obligatoria
+            </Form.Text>
+          )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formFechaSalida">
           <Form.Label>Fecha de Salida*</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="DD/MM/YYYY"
-            {...register("fecha_salida", {
-              required: "La fecha de salida es obligatoria",
-              pattern:{
-                value: /^\d{1,2}\/\d{1,2}\/\d{4}$/g,
-                message: "El formato de la fecha ingresada no es válido"
-              },
-              validate: {
-                dateDisabled: value => isDateDisabledSalida(value) || "La fecha ingresada ya está reservada"
-              }
-            })}
+          <DatePicker
+            disabledDate={(current) => disabledDates.includes(current.format('DD/MM/YYYY')) ||
+              current < moment().startOf('day')}
+            style={{ width: '100%' }}
+            format="DD/MM/YYYY"
+            placeholder="Seleccione una fecha"
+            value={fechaSalida}
+            onChange={(date) => setFechaSalida(date)}
+            name='fechaSalida'
+            required
           />
-          <Form.Text className="text-danger">
-            {errors.fecha_salida?.message}
-          </Form.Text>
+          {
+            !fechaSalida && (
+              <Form.Text className="text-danger">
+                La fecha de salida es obligatoria
+              </Form.Text>
+            )
+          }
+          {fechaEntrada && fechaSalida && fechaEntrada.isAfter(fechaSalida) && (
+            <Form.Text className="text-danger">
+              La fecha de entrada no puede ser mayor que la fecha de salida
+            </Form.Text>
+          )}
+          {fechaEntrada && fechaEntrada.isSame(moment(), 'day') && (
+            <Form.Text className="text-danger">
+              No se puede reservar para la fecha de hoy
+            </Form.Text>
+          )}
+          {validarReservasEnRango() && (
+            <Form.Text className="text-danger">
+              No se puede reservar en el rango de fechas seleccionado
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Button type="primary" htmlType="submit">

@@ -19,7 +19,6 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
     setValue
   } = useForm();
 
-  console.log(initialValues.nombre)
 
   const [title, setTitle] = useState('');
   const [submitText, setSubmitText] = useState('');
