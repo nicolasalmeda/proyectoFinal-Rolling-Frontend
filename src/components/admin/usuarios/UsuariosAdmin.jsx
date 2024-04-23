@@ -64,11 +64,13 @@ const HabitacionesAdmin = () => {
           <Button type='primary' 
           ghost
           onClick={() =>showModal(record)}
+          disabled={record.rol === true}
           >
             Editar
           </Button>
           <Button
             danger
+            disabled={record.rol === true}
             onClick={() => {
               Modal.confirm({
                 title: 'Eliminar Usuario',
