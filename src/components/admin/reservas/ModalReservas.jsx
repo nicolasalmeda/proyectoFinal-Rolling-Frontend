@@ -66,18 +66,32 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   const onSubmit = async (values) => {
     values.fecha_entrada = fechaEntrada.format('DD/MM/YYYY');
     values.fecha_salida = fechaSalida.format('DD/MM/YYYY');
-    try{
+    
       if (!isEdit) {
-        await dispatch(addReserva(values));
-        openNotification(' Reserva creada',true);
+        try{
+          const response = await dispatch(addReserva(values));
+          if(response){
+            openNotification(' Reserva creada',true);
+          }else{
+            openNotification('Hubo un problema',false);
+          }
+          await finish();
+        } catch(err){
+          openNotification( 'Hubo un problema',false);
+        }
       } else {
-        await dispatch(updateReserva(initialValues._id, values));
-        openNotification('Reserva actualizada',true);
-      }
-      await finish();
-    } catch(err){
-      openNotification( 'Hubo un problema',false);
-    }
+        try{
+          const response= await dispatch(updateReserva(initialValues._id, values));
+          if(response){
+            openNotification('Reserva actualizada',true);
+          }else{
+            openNotification('Hubo un problema',false);
+          }
+          await finish();
+        }catch(err){
+          openNotification('Hubo un problema',false);
+        }
+      }  
   };
 
   const finish =  () => {  
@@ -88,7 +102,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
 
   const openNotification = ( message, icon) => {
     notification.success({
-      message: `${message}!`,
+      message: icon ? 'La operación se realizo con éxito' : 'Hubo un problema!',
       description:
       `${message}`,
       icon: (

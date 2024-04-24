@@ -47,18 +47,31 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
   }, [isEdit, initialValues]);
 
   const onSubmit = async (values) => {
-    try{
       if (!isEdit) {
-        await dispatch(addHabitacion(values));
-        openNotification(' Habitación creada',true);
+        try{
+          const response = await dispatch(addHabitacion(values))
+          if(response){
+            openNotification('Habitación creada',true);
+          }else{
+            openNotification('La habitación no se pudo crear',false);
+          }
+        }catch(error){
+          openNotification('La habitación no se pudo crear',false);
+        }
       } else {
-        await dispatch(updateHabitacion(initialValues._id, values));
-        openNotification('Habitación actualizada',true);
+        try{
+          const response = await dispatch(updateHabitacion(initialValues._id, values));
+          if(response){
+            openNotification('Habitación actualizada',true);
+          }else{
+            openNotification('La habitación no se pudo actualizar',false);
+          }
+          await finish();
+        }catch(err){
+          openNotification('La habitación no se pudo actualizar',false);
+        }
       }
-      await finish();
-    } catch(err){
-      openNotification( 'Hubo un problema',false);
-    }
+      
   };
 
   const finish =  () => {  
@@ -68,9 +81,11 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
 
   const openNotification = ( message, icon) => {
     notification.success({
-      message: `${message}!`,
+      message: (
+        icon ? 'La operación se realizo con éxito' : 'Hubo un problema!'
+      ),
       description:
-      `El ${message} correctamente`,
+      `${message}`,
       icon: (
         icon ? <SmileOutlined
           style={{

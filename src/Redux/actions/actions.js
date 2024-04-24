@@ -6,6 +6,7 @@ export const DELETE_HABITACION = 'DELETE_HABITACION';
 export const ADD_HABITACION = 'ADD_HABITACION';
 export const UPDATE_HABITACION = 'UPDATE_HABITACION';
 export const GET_HABITACION= 'GET_HABITACION';
+export const HABITACIONES_ERROR = 'HABITACIONES_ERROR';
 
 
 //HABITACIONES
@@ -22,7 +23,7 @@ export const getHabitaciones = () => {
             });
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
@@ -39,7 +40,7 @@ export const getHabitacion = (id) => {
             });
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
@@ -56,7 +57,7 @@ export const deleteHabitacion = (id) => {
             });
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
@@ -66,16 +67,16 @@ export const deleteHabitacion = (id) => {
 export const addHabitacion = (habitacion) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('/habitaciones', habitacion);
-            console.log(response.data)
-            dispatch({
-                type: ADD_HABITACION,
-                payload: response.data,
-            });
-        } catch (error) {
-            dispatch({
-                type: 'HABITACIONES_ERROR',
-                payload: error.message
+                const response = await axios.post('/habitaciones', habitacion);
+                dispatch({
+                    type: ADD_HABITACION,
+                    payload: response.data,
+                });
+                return response.data;
+            }catch (error) {
+                dispatch({
+                    type: HABITACIONES_ERROR,
+                    payload: error.message
             });
         }
     };
@@ -92,9 +93,10 @@ export const updateHabitacion = (id, habitacion) => {
                     habitacion
                 }
             });
+            return response.data;
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
@@ -173,6 +175,7 @@ export const getUsuarios = () => {
           type: ADD_USUARIO,
           payload: response.data,
         });
+        return response.data;
       } catch (error) {
         dispatch({
           type: USUARIOS_ERROR,
@@ -193,6 +196,7 @@ export const getUsuarios = () => {
             usuario: response.data
           }
         });
+        return response.data;
       } catch (error) {
         dispatch({
           type: USUARIOS_ERROR,
@@ -260,6 +264,8 @@ export const addReserva = (reserva) => {
                 type: ADD_RESERVA,
                 payload: response.data,
             });
+
+            return response.data;
         } catch (error) {
             dispatch({
                 type: 'RESERVAS_ERROR',
@@ -280,6 +286,7 @@ export const updateReserva = (id, reserva) => {
                     reserva
                 }
             });
+            return response.data;
         } catch (error) {
             dispatch({
                 type: 'RESERVAS_ERROR',
