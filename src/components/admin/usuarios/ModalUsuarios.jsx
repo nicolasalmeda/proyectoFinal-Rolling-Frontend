@@ -11,6 +11,10 @@ import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 
 const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
   const dispatch = useDispatch();
+  const [title, setTitle] = useState('');
+  const [submitText, setSubmitText] = useState('');
+  const [token, setToken] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -20,8 +24,6 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
   } = useForm();
 
 
-  const [title, setTitle] = useState('');
-  const [submitText, setSubmitText] = useState('');
 
   const cargarDatosUsuario =  () => {
     if (initialValues){
@@ -33,6 +35,10 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
     setValue('rol', initialValues.rol || '');
     }
   }
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
 
   useEffect(() => {
     reset()
@@ -47,18 +53,31 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
   }, [isEdit, initialValues]);
 
   const onSubmit = async (values) => {
-    try{
       if (!isEdit) {
-        await dispatch(createUsuario(values));
-        openNotification(' Usuario creado',true);
+        try{
+          const response = await dispatch(createUsuario(values,token));
+          if(response){
+            openNotification(' Usuario creado',true);
+          }else{
+            openNotification('El usuario no se pudo crear',false);
+          }
+          await finish();
+        } catch{
+          openNotification('El usuario no se pudo crear',false);
+        }
       } else {
-        await dispatch(updateUsuario(initialValues._id, values));
-        openNotification('Usuario actualizado',true);
+        try{
+          const response= await dispatch(updateUsuario(initialValues._id, values, token));
+          if(response){
+            openNotification('Usuario actualizado',true);
+          }else{
+            openNotification('El usuario no se pudo actualizar',false);
+          }
+          await finish();
+        }catch{
+          openNotification('El usuario no se pudo actualizar',false);
+        }
       }
-      await finish();
-    } catch(err){
-      openNotification( 'Hubo un problema',false);
-    }
   };
 
   const finish =  () => {  
@@ -68,9 +87,9 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
 
   const openNotification = ( message, icon) => {
     notification.success({
-      message: `${message}!`,
+      message: icon ? 'La operación se realizo con éxito' : 'Hubo un problema!',
       description:
-      `El ${message} correctamente`,
+      `${message}`,
       icon: (
         icon ? <SmileOutlined
           style={{
@@ -187,9 +206,10 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
         <Form.Group className="mb-3" controlId="formTipo">
           <Form.Label>Rol*</Form.Label>
           <Form.Select
-            {...register("rol", {
+            {...register("rol",{
               required: "El Rol de usuario es obligatorio",
-            })}
+            },
+            )}
           >
             <option value="">Seleccione una opcion</option>
             <option value={true}>Administrador</option>
@@ -216,7 +236,7 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
             {errors.imagen?.message}
           </Form.Text>
         </Form.Group>
-        <Button type="primary" htmlType="submit">
+        <Button className='mt-4' type="primary" htmlType="submit">
             {submitText}
           </Button>
       </Form>

@@ -17,6 +17,9 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   const usuarios = useSelector((state) => state.usuarios.usuarios);
   const [fechaEntrada, setFechaEntrada] = useState(null);
   const [fechaSalida, setFechaSalida] = useState(null);
+  const [token, setToken] = useState('')
+  const [title, setTitle] = useState('');
+  const [submitText, setSubmitText] = useState('');
   
   const {
     register,
@@ -24,23 +27,23 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
     formState: { errors },
     reset,
     setValue,
-    getValues
   } = useForm();
 
-
-  const [title, setTitle] = useState('');
-  const [submitText, setSubmitText] = useState('');
-
+  
   const cargarDatosProducto =  () => {
     if (initialValues){
-    setValue('numero_reserva', initialValues.numero_reserva || '');
-    setValue('usuario', initialValues.usuario || '');
-    setValue('habitacion', initialValues.habitacion || '');
-    setFechaEntrada(moment(initialValues.fecha_entrada , 'DD/MM/YYYY') || null);
-    setFechaSalida(moment(initialValues.fecha_salida,'DD/MM/YYYY') || null);
+      setValue('numero_reserva', initialValues.numero_reserva || '');
+      setValue('usuario', initialValues.usuario || '');
+      setValue('habitacion', initialValues.habitacion || '');
+      setFechaEntrada(moment(initialValues.fecha_entrada , 'DD/MM/YYYY') || null);
+      setFechaSalida(moment(initialValues.fecha_salida,'DD/MM/YYYY') || null);
     }
   }
 
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
+  
   useEffect(() => {
     dispatch(getHabitaciones());
     dispatch(getUsuarios());
@@ -66,18 +69,34 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   const onSubmit = async (values) => {
     values.fecha_entrada = fechaEntrada.format('DD/MM/YYYY');
     values.fecha_salida = fechaSalida.format('DD/MM/YYYY');
-    try{
-      if (!isEdit) {
-        await dispatch(addReserva(values));
-        openNotification(' Reserva creada',true);
+
+    console.log(values)
+    
+      if(!isEdit) {
+        try{
+          const response = await dispatch(addReserva(values, token));
+          if(response){
+            openNotification(' Reserva creada',true);
+            await finish();
+          }else{
+            openNotification('No se pudo crear la reserva',false);
+          }
+        } catch(err){
+          openNotification( 'No se pudo crear la reserva',false);
+        }
       } else {
-        await dispatch(updateReserva(initialValues._id, values));
-        openNotification('Reserva actualizada',true);
-      }
-      await finish();
-    } catch(err){
-      openNotification( 'Hubo un problema',false);
-    }
+        try{
+          const response= await dispatch(updateReserva(initialValues._id, values, token));
+          if(response){
+            openNotification('Reserva actualizada',true);
+            await finish();
+          }else{
+            openNotification('No se pudo actualizar la reserva',false);
+          }
+        }catch(err){
+          openNotification('No se pudo actualizar la reserva',false);
+        }
+      }  
   };
 
   const finish =  () => {  
@@ -88,7 +107,7 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
 
   const openNotification = ( message, icon) => {
     notification.success({
-      message: `${message}!`,
+      message: icon ? 'La operación se realizo con éxito' : 'Hubo un problema!',
       description:
       `${message}`,
       icon: (

@@ -1,0 +1,16 @@
+.background__color--galeria{
+  background-color: #ffba66;
+}
+
+.title__galeria{
+  border-bottom: 4px solid #632c17;
+}
+
+.parrafo__galeria{
+  text-align: justify;
+  font-weight: 700;
+}
+
+.cointainer__carousel{
+  float: right;
+}
