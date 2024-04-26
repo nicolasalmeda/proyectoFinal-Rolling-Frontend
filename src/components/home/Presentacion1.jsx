@@ -1,20 +1,47 @@
 import React from 'react';
-import { Collapse } from 'antd';
+import Accordion from 'react-bootstrap/Accordion';
+import './Ofertas.css';
 
-const { Panel } = Collapse;
-
-const Presentacion1 = () => {
+function HotelFAQ() {
   return (
-    <Collapse accordion className='container '>
-      <Panel header="¿Cómo puedo hacer una reserva en el hotel?" key="1">
-        <p>Puedes hacer una reserva en nuestro hotel a través de nuestra página web, por teléfono o por correo electrónico. También puedes visitarnos en persona.</p>
-      </Panel>
-      <Panel header="¿Cuál es el horario de check-in y check-out?" key="2">
-        <p>El check-in está disponible a partir de las 15:00 y el check-out debe realizarse antes de las 12:00.</p>
-      </Panel>
-      {/* Agrega más preguntas y respuestas según sea necesario */}
-    </Collapse>
+    <>
+    <h2 className='fw-bold'>Preguntas Frecuentes </h2>
+    <Accordion className="container " defaultActiveKey="0">
+      <Accordion.Item>
+        <Accordion.Header className="custom-header">
+          ¿Cuál es el horario de check-in y check-out?
+        </Accordion.Header>
+        <Accordion.Body className=' '>
+          El horario de check-in es a partir de las 15:00 y el horario de check-out es antes de las 12:00.
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header className="custom-header">
+          ¿Ofrecen servicio de transporte desde/hacia el aeropuerto?
+        </Accordion.Header>
+        <Accordion.Body>
+          Sí, ofrecemos servicio de transporte desde y hacia el aeropuerto. Por favor, contáctanos con anticipación para organizar el servicio.
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="2">
+        <Accordion.Header className="custom-header">
+          ¿Se permiten mascotas en el hotel?
+        </Accordion.Header>
+        <Accordion.Body>
+          Sí, se permiten mascotas en el hotel. Sin embargo, puede haber restricciones y tarifas adicionales. Por favor, contáctanos para obtener más información.
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="3">
+        <Accordion.Header className="custom-header">
+          ¿Ofrecen servicio de lavandería?
+        </Accordion.Header>
+        <Accordion.Body>
+          Sí, ofrecemos servicio de lavandería para nuestros huéspedes. Puedes solicitar el servicio en la recepción del hotel.
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+    </>
   );
-};
+}
 
-export default Presentacion1;
+export default HotelFAQ;

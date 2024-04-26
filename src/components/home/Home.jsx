@@ -16,7 +16,6 @@ const Home = () => {
                 <div className='banner-2-home'>
                     <p>Hospitalidad sin igual en un entorno exclusivo</p>
                   </div>
-                <div> <h2 className='text-center'>Amenities del hotel</h2></div>
                 <Amenities></Amenities>
                 <Presentacion1/>            
         </div>

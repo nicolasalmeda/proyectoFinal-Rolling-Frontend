@@ -25,7 +25,7 @@ const Footer = () => {
               <p><i className="bi bi-instagram"></i> Instagram</p>
             </Link>
           </div>
-            {/* <div className='col-md-4 col-lg-3'>
+            <div className='col-md-4 col-lg-3'>
               <h5><strong>Mapa del sitio</strong></h5>
               <Link to='/' className='nav-link text-white'>
                 <p>Inicio</p>
@@ -39,7 +39,7 @@ const Footer = () => {
               <Link to='/quienes' className='nav-link text-white'>
                 <p>Quiénes Somos</p>
                 </Link>
-            </div> */}
+            </div>
           <div className='col-md-12 col-lg-3 text-center d-flex flex-column justify-content-center'>
             <img src={logo} 
             alt='logo'
