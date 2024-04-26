@@ -11,6 +11,10 @@ import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 
 const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
   const dispatch = useDispatch();
+  const [title, setTitle] = useState('');
+  const [submitText, setSubmitText] = useState('');
+  const [token, setToken] = useState('')
+
   const {
     register,
     handleSubmit,
@@ -20,8 +24,6 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
   } = useForm();
 
 
-  const [title, setTitle] = useState('');
-  const [submitText, setSubmitText] = useState('');
 
   const cargarDatosProducto =  () => {
     if (initialValues){
@@ -33,6 +35,10 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
     setValue('descripcion', initialValues.descripcion || '');
     }
   }
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
 
   useEffect(() => {
     reset()
@@ -49,9 +55,10 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
   const onSubmit = async (values) => {
       if (!isEdit) {
         try{
-          const response = await dispatch(addHabitacion(values))
+          const response = await dispatch(addHabitacion(values,token))
           if(response){
             openNotification('Habitación creada',true);
+            await finish();
           }else{
             openNotification('La habitación no se pudo crear',false);
           }
@@ -60,13 +67,13 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
         }
       } else {
         try{
-          const response = await dispatch(updateHabitacion(initialValues._id, values));
+          const response = await dispatch(updateHabitacion(initialValues._id, values, token));
           if(response){
             openNotification('Habitación actualizada',true);
+            await finish();
           }else{
             openNotification('La habitación no se pudo actualizar',false);
           }
-          await finish();
         }catch(err){
           openNotification('La habitación no se pudo actualizar',false);
         }

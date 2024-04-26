@@ -14,6 +14,7 @@ const HabitacionesAdmin = () => {
   const [usuarioData, setUsuarioData] = useState([])
   const [isEdit, setIsEdit] = useState(false)
   const usuarios = useSelector((state) => state.usuarios.usuarios)
+  const [token, setToken] = useState('')
 
   const mappedUsuarios = usuarios && Array.isArray(usuarios) ? usuarios.map(usuario => ({
     ...usuario,
@@ -23,6 +24,10 @@ const HabitacionesAdmin = () => {
   useEffect(() => {
     dispatch(getUsuarios())
   }, [dispatch])
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
 
   const handleAddUsuarioClick = () => {
     setModalVisible(true)
@@ -78,7 +83,7 @@ const HabitacionesAdmin = () => {
                 okText: 'Eliminar',
                 okType: 'danger',
                 onOk() {
-                  dispatch(deleteUsuario(record._id))
+                  dispatch(deleteUsuario(record._id, token))
                   openNotification(record.nombre)
                   dispatch(getUsuarios())
                 },

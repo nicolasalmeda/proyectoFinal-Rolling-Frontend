@@ -11,6 +11,10 @@ import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 
 const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
   const dispatch = useDispatch();
+  const [title, setTitle] = useState('');
+  const [submitText, setSubmitText] = useState('');
+  const [token, setToken] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -20,8 +24,6 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
   } = useForm();
 
 
-  const [title, setTitle] = useState('');
-  const [submitText, setSubmitText] = useState('');
 
   const cargarDatosUsuario =  () => {
     if (initialValues){
@@ -33,6 +35,10 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
     setValue('rol', initialValues.rol || '');
     }
   }
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
 
   useEffect(() => {
     reset()
@@ -49,7 +55,7 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
   const onSubmit = async (values) => {
       if (!isEdit) {
         try{
-          const response = await dispatch(createUsuario(values));
+          const response = await dispatch(createUsuario(values,token));
           if(response){
             openNotification(' Usuario creado',true);
           }else{
@@ -61,7 +67,7 @@ const ModalUsuarios = ({ open, onCancel, isEdit, initialValues}) => {
         }
       } else {
         try{
-          const response= await dispatch(updateUsuario(initialValues._id, values));
+          const response= await dispatch(updateUsuario(initialValues._id, values, token));
           if(response){
             openNotification('Usuario actualizado',true);
           }else{

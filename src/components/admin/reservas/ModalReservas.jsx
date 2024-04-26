@@ -17,6 +17,9 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   const usuarios = useSelector((state) => state.usuarios.usuarios);
   const [fechaEntrada, setFechaEntrada] = useState(null);
   const [fechaSalida, setFechaSalida] = useState(null);
+  const [token, setToken] = useState('')
+  const [title, setTitle] = useState('');
+  const [submitText, setSubmitText] = useState('');
   
   const {
     register,
@@ -24,23 +27,23 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
     formState: { errors },
     reset,
     setValue,
-    getValues
   } = useForm();
 
-
-  const [title, setTitle] = useState('');
-  const [submitText, setSubmitText] = useState('');
-
+  
   const cargarDatosProducto =  () => {
     if (initialValues){
-    setValue('numero_reserva', initialValues.numero_reserva || '');
-    setValue('usuario', initialValues.usuario || '');
-    setValue('habitacion', initialValues.habitacion || '');
-    setFechaEntrada(moment(initialValues.fecha_entrada , 'DD/MM/YYYY') || null);
-    setFechaSalida(moment(initialValues.fecha_salida,'DD/MM/YYYY') || null);
+      setValue('numero_reserva', initialValues.numero_reserva || '');
+      setValue('usuario', initialValues.usuario || '');
+      setValue('habitacion', initialValues.habitacion || '');
+      setFechaEntrada(moment(initialValues.fecha_entrada , 'DD/MM/YYYY') || null);
+      setFechaSalida(moment(initialValues.fecha_salida,'DD/MM/YYYY') || null);
     }
   }
 
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
+  
   useEffect(() => {
     dispatch(getHabitaciones());
     dispatch(getUsuarios());
@@ -66,30 +69,32 @@ const ModalReservas = ({ open, onCancel, isEdit, initialValues}) => {
   const onSubmit = async (values) => {
     values.fecha_entrada = fechaEntrada.format('DD/MM/YYYY');
     values.fecha_salida = fechaSalida.format('DD/MM/YYYY');
+
+    console.log(values)
     
-      if (!isEdit) {
+      if(!isEdit) {
         try{
-          const response = await dispatch(addReserva(values));
+          const response = await dispatch(addReserva(values, token));
           if(response){
             openNotification(' Reserva creada',true);
+            await finish();
           }else{
-            openNotification('Hubo un problema',false);
+            openNotification('No se pudo crear la reserva',false);
           }
-          await finish();
         } catch(err){
-          openNotification( 'Hubo un problema',false);
+          openNotification( 'No se pudo crear la reserva',false);
         }
       } else {
         try{
-          const response= await dispatch(updateReserva(initialValues._id, values));
+          const response= await dispatch(updateReserva(initialValues._id, values, token));
           if(response){
             openNotification('Reserva actualizada',true);
+            await finish();
           }else{
-            openNotification('Hubo un problema',false);
+            openNotification('No se pudo actualizar la reserva',false);
           }
-          await finish();
         }catch(err){
-          openNotification('Hubo un problema',false);
+          openNotification('No se pudo actualizar la reserva',false);
         }
       }  
   };
