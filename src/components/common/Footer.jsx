@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className='bg-dark p-4 d-flex'>
+
+    <footer className='backgound__color--footer p-1 d-flex'>
+
       <div className='container text-light'>
         <div className='row'>
           <div className='col-md-4 col-lg-3'>
@@ -25,21 +27,21 @@ const Footer = () => {
               <p><i className="bi bi-instagram"></i> Instagram</p>
             </Link>
           </div>
-          <div className='col-md-4 col-lg-3'>
-            <h5><strong>Mapa del sitio</strong></h5>
-            <Link to='/' className='nav-link text-white'>
-              <p>Inicio</p>
-            </Link>
-            <Link to='/contacto' className='nav-link text-white'>
-              <p>Contacto</p>
-            </Link>
-            <Link to='/galeria' className='nav-link text-white'>
-              <p>Galería</p>
+            <div className='col-md-4 col-lg-3'>
+              <h5><strong>Mapa del sitio</strong></h5>
+              <Link to='/' className='nav-link text-white'>
+                <p>Inicio</p>
               </Link>
-            <Link to='/quienes' className='nav-link text-white'>
-              <p>Quiénes Somos</p>
+              <Link to='/contacto' className='nav-link text-white'>
+                <p>Contacto</p>
               </Link>
-          </div>
+              <Link to='/galeria' className='nav-link text-white'>
+                <p>Galería</p>
+                </Link>
+              <Link to='/quienes' className='nav-link text-white'>
+                <p>Quiénes Somos</p>
+                </Link>
+            </div>
           <div className='col-md-12 col-lg-3 text-center d-flex flex-column justify-content-center'>
             <img src={logo} 
             alt='logo'

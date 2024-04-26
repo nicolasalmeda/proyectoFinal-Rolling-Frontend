@@ -55,9 +55,9 @@
 }
 
 .backgound__color--nav{
-  background: rgb(160,166,3);
-background: linear-gradient(0deg, rgba(160,166,3,1) 0%, rgba(242,203,5,1) 100%);
-
+  background: rgb(33,25,20);
+  background: radial-gradient(circle, rgba(33,25,20,1) 11%, rgba(126,62,34,1) 45%, rgba(238,212,165,1) 94%);
+    
 }
 
 .button__color{
