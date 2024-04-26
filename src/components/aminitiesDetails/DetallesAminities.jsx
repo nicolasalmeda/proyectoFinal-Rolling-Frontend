@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { infoAminities } from '../../helpers/aminities';
 import { useParams } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
@@ -8,6 +8,12 @@ const DetallesAminities = () => {
   const { amenities } = useParams();
   const detalles = infoAminities[amenities];
   
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   return (
     <div className='text-center container-detailsAmenities'>
       <h2>{detalles.titulo}</h2>

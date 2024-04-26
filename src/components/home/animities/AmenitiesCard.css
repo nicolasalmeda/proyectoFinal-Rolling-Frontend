@@ -2,28 +2,44 @@
   width: 30%;
   margin: 0;
   border-radius: 1rem;
-  border: thin solid black;
+  border: thin solid white;
   transition: all ease-in-out .5s;
   cursor: pointer;
-  box-shadow: -4px 4px 5px black; 
+  box-shadow: -4px -7px 5px #FFE3B1 ; 
+  background: rgb(255,139,89);
+background: linear-gradient(90deg, rgba(255,139,89,1) 0%, rgba(155,84,53,1) 19%, rgba(43,23,14,1) 47%, rgba(59,32,17,1) 85%, rgba(187,105,44,1) 100%);
 }
 
 .card-container-amenities:hover {
   transform: scale(1.1);
 }
 
+
+.Buttom-aminities{
+color: white;
+background-color:  #92401F;
+}
+
 .title-amenities {
   margin: 0;
+  color: white;
+  font-family: "Playfair Display", serif;
 }
 
 .description-amenities {
-  margin: 0;
+  margin: 1px;
   text-align: left;
+  color:  white;
+  font-size: 1rem;
+  font-weight: bold;
+  
 }
 
 .img-amenities {
-  width: 70px !important;
+  width: 70px !important; /* Cambia el valor según sea necesario */
+  height: auto; /* Para mantener la proporción de aspecto */
 }
+
 
 .amenities-container {
   display: flex;
@@ -71,4 +87,9 @@
   .card-container-amenities:hover {
     transform: scale(0.90);
   }
+  .img-amenities {
+    width: 70px !important; /* Cambia el valor según sea necesario */
+    height: auto; /* Para mantener la proporción de aspecto */
+  }
+  
 }

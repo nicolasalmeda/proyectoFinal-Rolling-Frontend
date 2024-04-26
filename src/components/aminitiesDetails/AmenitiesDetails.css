@@ -1,6 +1,7 @@
 .carousel-amenities {
   width: 60%;
   margin: auto;
+  box-shadow: 6px -6px 7px white    ; 
 }
 
 .img-amenities-1 {
@@ -19,11 +20,16 @@
   line-height: 27px;
   font-weight: 400;
   word-spacing: 3px;
-  color: #464e52;
+  color: white;
+}
+.container-detailsAmenities h2 {
+  color: white;
 }
 
 .container-detailsAmenities {
-  box-sizing: border-box
+  box-sizing: border-box;
+  background: rgb(255,139,89);
+  background: linear-gradient(90deg, rgba(255,139,89,1) 0%, rgba(155,84,53,1) 6%, rgba(43,23,14,1) 17%, rgba(59,32,17,1) 82%, rgba(187,105,44,1) 100%);
 }
 
 @media screen and (max-width: 319px) {
