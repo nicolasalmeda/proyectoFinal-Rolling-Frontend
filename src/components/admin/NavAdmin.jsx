@@ -15,8 +15,8 @@ const NavAdmin = () => {
 
   const location = useLocation();
   const pathname = location.pathname;
-  const inactiveLink = 'nav-link d-flex gap-2 py-3 ms-2  ';
-  const activeLink = 'nav-link d-flex gap-2 py-3 ms-2 bg-white text__color rounded-start ';
+  const inactiveLink = 'nav-link d-flex gap-2 py-3 ms-2';
+  const activeLink = 'd-flex gap-2 py-3 ms-2 bg-white text__color rounded-start ';
 
 
 

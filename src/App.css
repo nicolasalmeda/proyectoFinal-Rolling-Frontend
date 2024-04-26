@@ -35,6 +35,12 @@
   border: red solid 2px;
 }
 
+.danger__cell{
+  color: red;
+  border: red solid 2px;
+  background-color: rgba(255, 0, 0, 0.296);
+}
+
 .danger__error{
   max-width: 500px;
   color: red;

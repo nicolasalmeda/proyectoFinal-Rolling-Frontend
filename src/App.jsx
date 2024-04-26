@@ -16,8 +16,9 @@ import Error404 from "./components/Error404.jsx";
 import Login from "./components/Login.jsx";
 import Registro from "./components/Registro.jsx";
 import Detalle from "./components/detalle/Detalle.jsx";
-import Galeria from "./components/galeria/Galeria.jsx";
+import Galeria from "./components/Galeria.jsx";
 import Contacto from "./components/Contacto.jsx";
+import QuienesSomos from "./components/QuienesSomos.jsx";
 import './App.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -65,6 +66,7 @@ function App() {
         <Route exact path="*" element={<Error404/>}/>
         <Route path="/servicio/:amenities" element={<DetallesAminities/>} />
         <Route exact path="/habitaciones" element={<RoomsSection/>}/>
+        <Route exact path="/quienes-somos" element={<QuienesSomos/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>
