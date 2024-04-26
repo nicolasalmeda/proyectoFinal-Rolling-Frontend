@@ -1,7 +1,6 @@
 import React from "react";
 import './StyleDetailsHotel.css';
 import { Button } from 'antd';
-import entradaHotel from '../../../assets/images/hotel_entrada.jpg'
 const DetailsHotel = () => {
   return (
     <div className="container-fluid text-center  bg-details">
@@ -14,7 +13,6 @@ const DetailsHotel = () => {
           <Button className="btn-details" type="link" value="defaul">Ver más</Button>
         </div>
         <div className="imagen-hotel">
-          <img src={entradaHotel} alt="Frente del hotel" />
         </div>
       </div>
     </div>

@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+.container-home{
+    background: linear-gradient(135deg, #8b0000, #f3e5ab);
+
+}
+
 .banner-home {
     background-image: url("../../assets/images/banner1.jpg");
     background-size: 100% 100%;
@@ -23,6 +30,7 @@
     line-height: 27px;
     font-weight: 600;
     word-spacing: 3px;
+    font-family: "Playfair Display", serif;
 }
 
 .button-home {
@@ -129,7 +137,8 @@
     .tittle-home {
         top: 13%;
         left: 40%;
-        font-size: 20px;
+        font-size: 30px;
+        font-family: "Playfair Display", serif;
     }
     .button-home{
         bottom: 75%;
