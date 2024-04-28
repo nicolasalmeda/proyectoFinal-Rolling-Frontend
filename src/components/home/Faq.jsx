@@ -5,7 +5,7 @@ import './Faq.css';
 function HotelFAQ() {
   return (
     <>
-    <h2 className='fw-bold'>Preguntas Frecuentes </h2>
+    <h2 className=' text-center fw-bold'>Preguntas Frecuentes </h2>
     <Accordion className="container mt-3 " defaultActiveKey="0">
       <Accordion.Item>
         <Accordion.Header className="custom-header">
