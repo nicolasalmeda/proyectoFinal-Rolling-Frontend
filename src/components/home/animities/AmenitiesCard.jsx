@@ -5,7 +5,7 @@ import './AmenitiesCard.css';
 const AmenitiesCard = ({ icon, title, description, onClick }) => {
   return (
     <Card
-      className="card-container-amenities d-flex align-items-center justify-content-center backgound__color--error"
+      className="card-container-amenities d-flex align-items-center justify-content-center backgound__color--error fade-in-animation slide-in-animation"
       onClick={onClick}
     >
       <div className="d-flex align-items-center">

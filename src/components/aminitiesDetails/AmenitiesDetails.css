@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
 .carousel-amenities {
   width: 60%;
   margin: auto;
-  box-shadow: 6px -6px 7px white    ; 
+  margin-bottom: 2rem;
+  box-shadow: 6px -6px 7px white; 
 }
 
 .img-amenities-1 {
@@ -20,16 +23,20 @@
   line-height: 27px;
   font-weight: 400;
   word-spacing: 3px;
+  margin: 2rem auto;
   color: white;
 }
 .container-detailsAmenities h2 {
   color: white;
+  margin: 1.5rem 0;
 }
 
 .container-detailsAmenities {
   box-sizing: border-box;
   background: rgb(255,139,89);
   background: linear-gradient(90deg, rgba(255,139,89,1) 0%, rgba(155,84,53,1) 6%, rgba(43,23,14,1) 17%, rgba(59,32,17,1) 82%, rgba(187,105,44,1) 100%);
+  font-family: "Playfair Display", serif;
+  margin: 0;
 }
 
 @media screen and (max-width: 319px) {

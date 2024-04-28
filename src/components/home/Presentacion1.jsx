@@ -11,7 +11,7 @@ function HotelFAQ() {
         <Accordion.Header className="custom-header">
           ¿Cuál es el horario de check-in y check-out?
         </Accordion.Header>
-        <Accordion.Body className=' '>
+        <Accordion.Body className='fw-bold'>
           El horario de check-in es a partir de las 15:00 y el horario de check-out es antes de las 12:00.
         </Accordion.Body>
       </Accordion.Item>

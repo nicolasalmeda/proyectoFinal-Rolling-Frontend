@@ -9,9 +9,9 @@ const Home = () => {
         <div className="container-home mainContainer backgound__color--nav pb-4">
             <div className="banner-home">
             </div>
-            <h1 className='tittle-home'> Bienvenidos al Hotel</h1>
-                <h3 className='subtittle-home'>Descubre el confort de nuestras habitaciones.<br/>
-                Tu oasis de tranquilidad te espera.</h3>
+            <h1 className='tittle-home'> Bienvenidos  </h1>
+                <h3 className='subtittle-home'><i>"Descubre el confort de nuestras habitaciones,<br/>
+                tu oasis de tranquilidad te espera."</i></h3>
                 <DetailsHotel/>
                 <div className='banner-2-home'>
                     <p>Hospitalidad sin igual en un entorno exclusivo</p>
