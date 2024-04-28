@@ -17,7 +17,7 @@ const Amenities = () => {
 
   return (
     <>
-    <h2 className=' fw-bold'>Servicios De Nuestro Hotel</h2>
+    <h2 className=' fw-bold mt-4'>Servicios De Nuestro Hotel</h2>
     <div className='amenities-container'>
       <AmenitiesCard onClick={() => handleClick('catering')} icon={<img className='img-amenities'  src={servicio} alt="" />} title="Servicio de Catering" description="Orgullosos de brindar un catering excepcional que realza la experiencia de huéspedes y eventos. Dedicación a calidad, creatividad y servicio personalizado." />
       <AmenitiesCard onClick={() => handleClick('gimnasio')} icon={<img className='img-amenities' src={gimnasio} alt="" />} title="Gimnasio" description="Descubra nuestro gimnasio de última generación: energía y vitalidad fusionadas para una experiencia excepcional. Equipado con lo último y rodeado de inspiración." />

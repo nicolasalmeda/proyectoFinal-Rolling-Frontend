@@ -1,7 +1,7 @@
 import './HomeStyle.css'
 import DetailsHotel from './detailsHotel/DetailsHotel';
 import Amenities from './animities/Amenities';
-import Presentacion1 from './Presentacion1';
+import Presentacion1 from './Faq';
 
 const Home = () => {
     

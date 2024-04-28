@@ -6,7 +6,7 @@ const DetailsHotel = () => {
   return (
     <div className="container-fluid text-center bg-details py-4 container__contacto">
       <h2 className=" text-h2 "> Acerca del Hotel</h2>
-      <div className="detalle-container">
+      <div className="detalle-container mt-4">
         <div className="descripcion-breve">
           <p className="fw-bold">
           En el corazón de la pintoresca ciudad costera, te damos la más cálida bienvenida al Hotel Serenity, donde cada momento está impregnado de tranquilidad y elegancia. Desde el momento en que cruzas nuestras puertas, te sumergirás en una experiencia de hospitalidad excepcional que redefine el confort y la serenidad.

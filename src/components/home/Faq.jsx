@@ -1,12 +1,12 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import './Ofertas.css';
+import './Faq.css';
 
 function HotelFAQ() {
   return (
     <>
     <h2 className='fw-bold'>Preguntas Frecuentes </h2>
-    <Accordion className="container " defaultActiveKey="0">
+    <Accordion className="container mt-3 " defaultActiveKey="0">
       <Accordion.Item>
         <Accordion.Header className="custom-header">
           ¿Cuál es el horario de check-in y check-out?
