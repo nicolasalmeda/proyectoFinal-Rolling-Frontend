@@ -40,6 +40,10 @@ background: radial-gradient(circle, rgba(129,117,110,1) 47%, rgba(33,25,20,1) 86
   }
   
 
+  .container__card{
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
 
   @media (max-width: 576px) {
     .card-image-container {

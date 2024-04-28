@@ -4,12 +4,14 @@ import {
   ADD_HABITACION,
   UPDATE_HABITACION,
   GET_HABITACION,
+  HABITACIONES_ERROR,
 } from '../actions/actions';
 
 const initialState = {
   habitaciones: [],
   allHabitaciones: [],
   habitacion: [],
+  error: null,
 };
 
 
@@ -50,9 +52,15 @@ const habitacionesReducer = (state = initialState, action) => {
         case UPDATE_HABITACION:
           return {
             ...state,
-            habitaciones: state.habitaciones.map(habitacion => habitacion.id === action.payload.id ? action.payload : habitacion),
-            allHabitaciones: state.allHabitaciones.map(habitacion => habitacion.id === action.payload.id ? action.payload : habitacion),
+            habitaciones: state.habitaciones.map(habitacion => habitacion._id === action.payload._id ? action.payload : habitacion),
+            allHabitaciones: state.allHabitaciones.map(habitacion => habitacion._id === action.payload._id ? action.payload : habitacion),
             error: null,
+          }
+
+        case HABITACIONES_ERROR:
+          return {
+            ...state,
+            error: action.payload,
           }
 
         default:

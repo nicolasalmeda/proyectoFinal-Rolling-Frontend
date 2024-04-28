@@ -7,18 +7,24 @@ import { useDispatch,useSelector } from 'react-redux';
 import { SmileOutlined } from '@ant-design/icons';
 import '../admin.css'
 import '../habitaciones/habitaciones.css'
+import { set } from 'react-hook-form';
 
 const HabitacionesAdmin = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
   const [reservaData, setReservaData] = useState([])
   const [isEdit, setIsEdit] = useState(false)
+  const [token, setToken] = useState('')
   const reservas = useSelector((state) => state.reservas.reservas)
 
   const mappedReservas = reservas && Array.isArray(reservas) ? reservas.map(reserva => ({
     ...reserva,
     key: reserva._id
   })) : [];
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
 
   useEffect(() => {
     dispatch(getReservas())
@@ -88,14 +94,18 @@ const HabitacionesAdmin = () => {
             danger
             onClick={() => {
               Modal.confirm({
-                title: 'Eliminar habitación',
-                content: `¿Está seguro que quiere eliminar la habitación ${record.numero_reserva}?`,
+                title: 'Eliminar Reserva',
+                content: `¿Está seguro que quiere eliminar la reserva ${record.numero_reserva}?`,
                 okText: 'Eliminar',
                 okType: 'danger',
                 onOk() {
-                  dispatch(deleteReserva(record._id))
-                  openNotification(record.numero_reserva)
-                  dispatch(getReservas())
+                  try{
+                    dispatch(deleteReserva(record._id, token))
+                    openNotification(record.numero_reserva)
+                    dispatch(getReservas())
+                  }catch(error){
+                    alert('Error al eliminar la reserva')
+                  }
                 },
                 footer: (_, { OkBtn, CancelBtn }) => (
                   <>
@@ -126,9 +136,9 @@ const HabitacionesAdmin = () => {
 
   const openNotification = (numero) => {
     notification.success({
-      message: 'Habitación eliminada',
+      message: 'Reserva eliminada',
       description:
-      `La habitacion ${numero} ha sido eliminada correctamente`,
+      `La reserva ${numero} ha sido eliminada correctamente`,
       icon: (
         <SmileOutlined
           style={{

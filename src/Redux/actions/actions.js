@@ -6,6 +6,7 @@ export const DELETE_HABITACION = 'DELETE_HABITACION';
 export const ADD_HABITACION = 'ADD_HABITACION';
 export const UPDATE_HABITACION = 'UPDATE_HABITACION';
 export const GET_HABITACION= 'GET_HABITACION';
+export const HABITACIONES_ERROR = 'HABITACIONES_ERROR';
 
 
 //HABITACIONES
@@ -22,7 +23,7 @@ export const getHabitaciones = () => {
             });
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
@@ -39,52 +40,64 @@ export const getHabitacion = (id) => {
             });
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
     }
 }
 
-export const deleteHabitacion = (id) => {
+export const deleteHabitacion = (id,token) => {
     return async (dispatch) => {
         try {
-            await axios.delete(`/habitaciones/${id}`);
+            await axios.delete(`/habitaciones/${id}`,{
+                headers: {
+                'x-token': token
+                },
+            });
             dispatch({
                 type: DELETE_HABITACION,
                 payload: id
             });
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
     };
 };
 
-export const addHabitacion = (habitacion) => {
+export const addHabitacion = (habitacion, token) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('/habitaciones', habitacion);
-            console.log(response.data)
-            dispatch({
-                type: ADD_HABITACION,
-                payload: response.data,
-            });
-        } catch (error) {
-            dispatch({
-                type: 'HABITACIONES_ERROR',
-                payload: error.message
+                const response = await axios.post('/habitaciones', habitacion,{
+                    headers: {
+                    'x-token': token
+                    },
+                });
+                dispatch({
+                    type: ADD_HABITACION,
+                    payload: response.data,
+                });
+                return response.data;
+            }catch (error) {
+                dispatch({
+                    type: HABITACIONES_ERROR,
+                    payload: error.message
             });
         }
     };
 }
 
-export const updateHabitacion = (id, habitacion) => {
+export const updateHabitacion = (id, habitacion, token) => {
     return async (dispatch) => {
         try {
-            const response = await axios.put(`/habitaciones/${id}`, habitacion);
+            const response = await axios.put(`/habitaciones/${id}`, habitacion ,{
+                headers: {
+                'x-token': token
+                },
+            });
             dispatch({
                 type: UPDATE_HABITACION,
                 payload: {
@@ -92,9 +105,10 @@ export const updateHabitacion = (id, habitacion) => {
                     habitacion
                 }
             });
+            return response.data;
         } catch (error) {
             dispatch({
-                type: 'HABITACIONES_ERROR',
+                type: HABITACIONES_ERROR,
                 payload: error.message
             });
         }
@@ -148,10 +162,14 @@ export const getUsuarios = () => {
     };
   };
   
-  export const deleteUsuario = (id) => {
+  export const deleteUsuario = (id, token) => {
     return async (dispatch) => {
       try {
-        await axios.delete(`/usuarios/${id}`);
+        await axios.delete(`/usuarios/${id}`,{
+            headers: {
+            'x-token': token
+            },
+        });
         dispatch({
           type: DELETE_USUARIO,
           payload: id
@@ -165,14 +183,19 @@ export const getUsuarios = () => {
     };
   };
   
-  export const createUsuario = (usuario) => {
+  export const createUsuario = (usuario, token) => {
     return async (dispatch) => {
       try {
-        const response = await axios.post('/usuarios', usuario);
+        const response = await axios.post('/usuarios', usuario,{
+            headers: {
+            'x-token': token
+            },
+        });
         dispatch({
           type: ADD_USUARIO,
           payload: response.data,
         });
+        return response.data;
       } catch (error) {
         dispatch({
           type: USUARIOS_ERROR,
@@ -182,10 +205,14 @@ export const getUsuarios = () => {
     };
   };
   
-  export const updateUsuario = (id, usuario) => {
+  export const updateUsuario = (id, usuario, token) => {
     return async (dispatch) => {
       try {
-        const response = await axios.put(`/usuarios/${id}`, usuario);
+        const response = await axios.put(`/usuarios/${id}`, usuario,{
+            headers: {
+            'x-token': token
+            },
+        });
         dispatch({
           type: UPDATE_USUARIO,
           payload: {
@@ -193,6 +220,7 @@ export const getUsuarios = () => {
             usuario: response.data
           }
         });
+        return response.data;
       } catch (error) {
         dispatch({
           type: USUARIOS_ERROR,
@@ -232,10 +260,14 @@ export const getReservas = () => {
     }
 }
 
-export const deleteReserva = (id) => {
+export const deleteReserva = (id,token) => {
     return async (dispatch) => {
         try {
-            await axios.delete(`/reservas/${id}`);
+            await axios.delete(`/reservas/${id}`,{
+                headers: {
+                'x-token': token
+                },
+            });
             dispatch({
                 type: DELETE_RESERVA,
                 payload: id
@@ -249,17 +281,20 @@ export const deleteReserva = (id) => {
     };
 };
 
-export const addReserva = (reserva) => {
+export const addReserva = (reserva,token) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('/reservas', reserva);
-            const habitacionId = reserva.habitacionId;
-            await axios.put(`/habitaciones/${habitacionId}`, { disponible: "no disponible" });
-            
+            const response = await axios.post('/reservas', reserva,{
+                headers: {
+                'x-token': token
+                },
+            });
             dispatch({
                 type: ADD_RESERVA,
                 payload: response.data,
             });
+
+            return response.data;
         } catch (error) {
             dispatch({
                 type: 'RESERVAS_ERROR',
@@ -269,10 +304,14 @@ export const addReserva = (reserva) => {
     };
 }
 
-export const updateReserva = (id, reserva) => {
+export const updateReserva = (id, reserva, token) => {
     return async (dispatch) => {
         try {
-            const response = await axios.put(`/reservas/${id}`, reserva);
+            const response = await axios.put(`/reservas/${id}`, reserva,{
+                headers: {
+                'x-token': token
+                },
+            });
             dispatch({
                 type: UPDATE_RESERVA,
                 payload: {
@@ -280,6 +319,7 @@ export const updateReserva = (id, reserva) => {
                     reserva
                 }
             });
+            return response.data;
         } catch (error) {
             dispatch({
                 type: 'RESERVAS_ERROR',
@@ -292,8 +332,7 @@ export const updateReserva = (id, reserva) => {
 export const getReservasByIdHabitacion = (id) => { 
     return async (dispatch) => {
         try{
-            const response = await axios.get(`/reservas/habitacion/${id}`);
-            
+            const response = await axios.get(`/reservas/habitacion/${id}`);            
             dispatch({
                 type: GET_RESERVAS_BY_HABITACION,
                 payload: response.data

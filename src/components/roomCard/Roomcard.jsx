@@ -20,7 +20,7 @@ const Roomcard = ({ imagen, tipo, descripcion, precio, id }) => {
   };
 
   return (
-    <div className="col-12 col-md-6 col-lg-4 mb-5 mt-5 container-card">
+    <div className="col-12 col-md-6 col-lg-4 mb-5 mt-5 container-card container__card">
       <div className="d-flex align-items-center justify-content-center">
         <div>
           <Card className=" border-0">

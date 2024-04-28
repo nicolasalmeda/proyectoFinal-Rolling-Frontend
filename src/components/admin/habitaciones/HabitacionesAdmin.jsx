@@ -9,16 +9,21 @@ import '../admin.css'
 import './habitaciones.css'
 
 const HabitacionesAdmin = () => {
-  const [modalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
+  const rooms = useSelector((state) => state.habitaciones.habitaciones)
+  const [modalVisible, setModalVisible] = useState(false)
   const [roomData, setRoomData] = useState([])
   const [isEdit, setIsEdit] = useState(false)
-  const rooms = useSelector((state) => state.habitaciones.habitaciones)
+  const [token, setToken] = useState('')
 
   const mappedRooms = rooms && Array.isArray(rooms) ? rooms.map(room => ({
     ...room,
     key: room._id
   })) : [];
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
 
   useEffect(() => {
     dispatch(getHabitaciones())
@@ -80,7 +85,7 @@ const HabitacionesAdmin = () => {
                 okText: 'Eliminar',
                 okType: 'danger',
                 onOk() {
-                  dispatch(deleteHabitacion(record._id))
+                  dispatch(deleteHabitacion(record._id,token))
                   openNotification(record.numero)
                   dispatch(getHabitaciones())
                 },

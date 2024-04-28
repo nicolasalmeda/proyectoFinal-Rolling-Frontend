@@ -11,6 +11,10 @@ import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 
 const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
   const dispatch = useDispatch();
+  const [title, setTitle] = useState('');
+  const [submitText, setSubmitText] = useState('');
+  const [token, setToken] = useState('')
+
   const {
     register,
     handleSubmit,
@@ -20,8 +24,6 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
   } = useForm();
 
 
-  const [title, setTitle] = useState('');
-  const [submitText, setSubmitText] = useState('');
 
   const cargarDatosProducto =  () => {
     if (initialValues){
@@ -33,6 +35,10 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
     setValue('descripcion', initialValues.descripcion || '');
     }
   }
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'))
+  }, [token])
 
   useEffect(() => {
     reset()
@@ -47,18 +53,32 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
   }, [isEdit, initialValues]);
 
   const onSubmit = async (values) => {
-    try{
       if (!isEdit) {
-        await dispatch(addHabitacion(values));
-        openNotification(' Habitación creada',true);
+        try{
+          const response = await dispatch(addHabitacion(values,token))
+          if(response){
+            openNotification('Habitación creada',true);
+            await finish();
+          }else{
+            openNotification('La habitación no se pudo crear',false);
+          }
+        }catch(error){
+          openNotification('La habitación no se pudo crear',false);
+        }
       } else {
-        await dispatch(updateHabitacion(initialValues._id, values));
-        openNotification('Habitación actualizada',true);
+        try{
+          const response = await dispatch(updateHabitacion(initialValues._id, values, token));
+          if(response){
+            openNotification('Habitación actualizada',true);
+            await finish();
+          }else{
+            openNotification('La habitación no se pudo actualizar',false);
+          }
+        }catch(err){
+          openNotification('La habitación no se pudo actualizar',false);
+        }
       }
-      await finish();
-    } catch(err){
-      openNotification( 'Hubo un problema',false);
-    }
+      
   };
 
   const finish =  () => {  
@@ -68,9 +88,11 @@ const ModalHabitaciones = ({ open, onCancel, isEdit, initialValues}) => {
 
   const openNotification = ( message, icon) => {
     notification.success({
-      message: `${message}!`,
+      message: (
+        icon ? 'La operación se realizo con éxito' : 'Hubo un problema!'
+      ),
       description:
-      `El ${message} correctamente`,
+      `${message}`,
       icon: (
         icon ? <SmileOutlined
           style={{
