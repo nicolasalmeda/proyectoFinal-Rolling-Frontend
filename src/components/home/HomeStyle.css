@@ -1,179 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
-.container-home{
-    background: rgb(33,25,20);
-background: radial-gradient(circle, rgba(33,25,20,1) 11%, rgba(126,62,34,1) 45%, rgba(238,212,165,1) 94%);
-    
-    color: white;
-    font-family: "Playfair Display", serif;
-
+.container-home {
+  background: radial-gradient(circle, rgba(33, 25, 20, 1) 11%, rgba(126, 62, 34, 1) 45%, rgba(238, 212, 165, 1) 94%);
+  color: white;
+  font-family: "Playfair Display", serif;
 }
 
 .banner-home {
-    background-image: url("../../assets/images/banner11.jpg");
-    background-size: 100% 100%;
-    height: 500px;
-    position: relative;
-    filter: brightness(35%);
-    margin: 0;
+  background-image: url("../../assets/images/banner11.jpg");
+  background-size: cover;
+  background-position: center;
+  height: clamp(500px, 70dvh , 1200px) !important;
+  position: relative;
+  filter: brightness(35%);
+}
+
+.tittle-home,
+.subtittle-home {
+  position: absolute;
+  animation: slide-in-fwd-center 3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .tittle-home {
-    position: absolute;
-    color: white;
-    font-weight: bolder;
-    top: 10%;
-    right: 10%;
+  font-size: clamp(.5rem, 7dvw , 9rem) !important;
+  top: 30% !important;
+  left: 10% !important;
 }
+
 .subtittle-home {
-    position: absolute;
-    color: white;
-    font-weight: bolder;
-    top: 38%;
-    right: 10%;
-    line-height: 27px;
-    font-weight: 600;
-    word-spacing: 3px;
+  top: 50%!important;
+  left: 10% !important;
+  font-weight: bolder;
+  font-size: clamp(.2rem, 4dvw, 2.8rem) !important;
 }
 
 .button-home {
-    position: absolute;
-    bottom: 70%; /* Ajusta la posición del botón */
-    right: 15%;
+  position: absolute;
+  bottom: 70%;
+  right: 15%;
 }
 
 .banner-2-home {
-    position: relative;
-    height: 300px;
-    background-image: url("../../assets/images/banne2.jpg");
-    background-size: cover;
-    background-position: center;
+  position: relative;
+  height: 300px;
+  background-image: url("../../assets/images/banne2.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .banner-2-home p {
-    position: absolute;
-    color: white;
-    font-weight: bolder;
-    font-size: 30px;
-    top: 40%;
-    left: 50%; /* Ajusta la posición del texto */
-    transform: translateX(-50%); /* Centra horizontalmente el texto */
+  position: absolute;
+  font-weight: bolder;
+  font-size: 30px;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-
-@media (min-width: 320px) and (max-width: 767px) {
-    .banner-home {
-        width: 100%;
-        height: 200px;
-    }
-
-
-    .tittle-home {
-        top: 17%;
-        left: 17%;
-        font-size: 20px;
-        font-family: "Playfair Display", serif;
-    }
-    .subtittle-home {
-        position: absolute;
-        color: white;
-        top:30%;
-        left: 18%;
-        font-size: 16px;
-        font-weight: bold;
-   
-    
-        font-family: "Playfair Display", serif;
-    }
-    .banner-2-home p {
-        position: absolute;
-        color: white;
-        font-size: 20px;
-        top: 40%;
-        left: 50%; /* Ajusta la posición del texto */
-        transform: translateX(-50%); /* Centra horizontalmente el texto */
-    }
-    
+@media screen and (max-width: 600px) {
+  .banner-home {
+    height: 60dvh!important;
+  }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-    .banner-home {
-        height: 400px;
-    }
-
-    .tittle-home {
-        top: 17%;
-        left: 35%;
-        font-size: 18px;
-    }
-    .subtittle-home {
-        position: absolute;
-        color: white;
-        top:40%;
-        right: 8%;
-        font-size: 20px;
-     
-    }
-    .button-home{
-        bottom: 72%;
-    }
-
-}
-
-@media (min-width: 1024px) and (max-width: 1440px) {
-    .banner-home {
-        height: 450px;
-    }
-
-    .tittle-home {
-        top: 11%;
-        left: 40%;
-        font-size: 30px;
-        font-family: "Playfair Display", serif;
-    }
-    .button-home{
-        bottom: 75%;
-    }
-    .subtittle-home {
-        position: absolute;
-        color: white;
-        top:60%;
-        right: 8%;
-        font-size: 35px;
-        line-height: 27px;
-        font-weight: 600;
-        word-spacing: 3px;
-    }
-}
-
-@media (min-width: 1440px) and (max-width: 2560px) {
-    .banner-home {
-        height: 450px;
-    }
-
-    .tittle-home {
-        top: 8%;
-        left: 40%;
-        font-size: 30px;
-    }
-   
-    .subtittle-home {
-        position: absolute;
-        color: white;
-        top:20%;
-        right: 8%;
-        font-size: 30px;
-        line-height: 27px;
-        font-weight: 600;
-        word-spacing: 3px;
-    }
-    .banner-2-home p {
-        position: absolute;
-        color: white;
-        font-weight: bolder;
-        font-size: 50px;
-        top: 40%;
-        left: 50%; /* Ajusta la posición del texto */
-        transform: translateX(-50%); /* Centra horizontalmente el texto */
-    }
+@keyframes slide-in-fwd-center {
+  0% {
+    transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
 }

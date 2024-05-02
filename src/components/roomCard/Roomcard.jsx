@@ -4,13 +4,19 @@ import { Button } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
-const Roomcard = ({ imagen, tipo, descripcion, precio,id }) => {
+const Roomcard = ({ imagen, tipo, descripcion, precio, id }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  // Función para truncar la descripción a 80 caracteres
+  const truncateDescription = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + "...";
   };
 
   return (
@@ -30,7 +36,7 @@ const Roomcard = ({ imagen, tipo, descripcion, precio,id }) => {
             <Card.Footer className="border-top border-gray-300 bg-gray-100 py-3">
               <p className="text-gray-900">Características:</p>
               <Card.Text className="text-3xl text-gray-900">
-                {descripcion}
+                {truncateDescription(descripcion, 140)} {/* Truncate description */}
               </Card.Text>
               <Link className="nav-link" to={`/habitacion/${id}`}>
                 <Button type="primary" shape="round" className="mt-auto">

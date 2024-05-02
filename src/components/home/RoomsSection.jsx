@@ -42,7 +42,7 @@ const RoomsSection = () => {
 
     return (
         <section className="container-fluid bg-card mainContainer backgound__color--nav">
-            <h2 className="text-center py-3 fw-bold">Habitaciones para Todos los Gustos<br></br> Explora Nuestro Catálogo</h2>
+            <h2 className="text-center py-3 fw-bold ">Habitaciones para Todos los Gustos<br></br> Explora Nuestro Catálogo</h2>
             <div className="row">
                 <div className="col-12">
                     <div className="filter-section">

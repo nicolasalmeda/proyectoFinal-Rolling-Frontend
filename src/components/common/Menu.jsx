@@ -2,6 +2,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../../assets/img/logo-bell.png';
+import '../home/HomeStyle.css'
 
 const Menu = () => {
  const token = sessionStorage.getItem('token');
@@ -11,7 +12,7 @@ const Menu = () => {
  };
 
  return (
-   <Navbar expand="lg" data-bs-theme="dark" className='bg-dark text-light sticky-top py-3'>
+   <Navbar expand="lg" data-bs-theme="dark" className='bg-dark  nav-animacion text-light sticky-top py-3'>
 
      <Container>
        <Navbar.Brand as={Link} to='/' className=''>
