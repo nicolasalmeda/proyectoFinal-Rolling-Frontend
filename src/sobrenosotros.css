@@ -1,0 +1,92 @@
+
+#image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: -1; 
+  }
+  
+  
+.info{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    height: 200px; 
+    margin-top: 25%;
+    padding-bottom: 50px;
+}
+
+#title{
+    position: relative; 
+    font-family: "Dancing Script", cursive;
+    font-size: 36px;
+    color: gold; 
+    text-decoration: underline; 
+    margin-top: 5000px; 
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#text{
+    margin-top: 10px;
+   display: flex;
+   justify-content: center;
+   text-align: center;
+}
+
+#text p{
+    
+    color: white; 
+    font-size: 26px;
+    text-shadow: 
+        -2px -2px 0 black,  
+         2px -2px 0 black,
+        -2px  2px 0 black,
+         2px  2px 0 black;
+}
+
+.team{
+    background-color: darkslategrey;
+    padding-bottom: 50px ;
+    padding-left: 350px;
+    padding-right: 30px;
+    
+}
+
+#title2 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+font-size: 50px; 
+color:gold; 
+text-decoration: underline; 
+}
+
+.card{
+    margin-bottom: 20px;
+}
+@media (min-width: 576px) {
+    #text p {
+      font-size: 18px; 
+    }
+    
+    #title {
+      font-size: 48px; 
+      margin-top: 500px;
+    }
+  
+    #title2 {
+      font-size: 32px; 
+    }
+  
+    .info {
+      margin-top: 100px; 
+    }
+  }
